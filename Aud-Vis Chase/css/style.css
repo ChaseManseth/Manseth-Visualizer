@@ -1,0 +1,25 @@
+body{
+/*    overflow: hidden;*/
+    margin: 0;
+}
+
+.bar {
+    position: absolute;
+    width: 7px;
+    background-color: black;
+    border-radius: 10px;
+}
+
+#viz {
+    position: relative;
+    margin-left: 45%;
+    margin-top: 15%;
+}
+
+.mid {
+    position: absolute;
+    width: 450px;
+    height: auto;
+    margin-top: -20%;
+    margin-left: -20%;
+}
