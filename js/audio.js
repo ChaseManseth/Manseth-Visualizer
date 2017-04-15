@@ -38,7 +38,7 @@ var $segs = 0;
 function update() {
     analyzer.getByteFrequencyData(dataArray);
     
-    for(var i = 0; i < bufferLength; i++) {
+    for(var i = 0; i < bufferLength - 90; i++) {
         var width = dataArray[i];
         
         $segs[i].css('height', width);
