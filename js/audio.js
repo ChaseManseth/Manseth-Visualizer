@@ -53,7 +53,7 @@ function init() {
     source.connect(analyzer);
     analyzer.connect(AUDIO.destination);
     
-    $segs = createSegments(bufferLength);
+    $segs = createSegments(bufferLength - 90);
     
     style();
     loop();
@@ -77,8 +77,8 @@ function style() {
         var y = Math.round(radius * Math.sin(angle));
         $elem.css('left', x + 'px');
         $elem.css('top', y + 'px');
-//        var rot = 0 + (1.4025 * i);
-        var rot = 0;
+        var rot = -90 + ((360 / $segs.length) * i);
+//        var rot = 0;
         $elem.css('transform', 'rotate(' + rot + 'deg)'); 
         angle += step;
         

@@ -4,16 +4,19 @@ body{
 }
 
 .bar {
-    position: absolute;
-    width: 7px;
+    position: fixed;
+    height: 1px;
+    width: 6px;
     background-color: black;
-    border-radius: 10px;
+    transform: rotate(90deg);
+    border-top: 3px solid red;
+    transform-origin: center top;
 }
 
 #viz {
     position: relative;
-    margin-left: 45%;
-    margin-top: 15%;
+    transform: rotate(-90deg);
+    margin-top: -25%;
 }
 
 .mid {

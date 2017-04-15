@@ -22,9 +22,12 @@ $(document).ready(function(){
         var y = Math.round(radius * Math.sin(angle));
         $bars[i].css('left', x + 'px');
         $bars[i].css('top', y + 'px');
-        $bars[i].css('height', i + 1);
         var rot = 90 + (1.4025 * i);
         $bars[i].css('transform', 'rotate(' + rot + 'deg)'); 
         angle += step;
+        
+//        if(i % 3 == 0) {
+//            $bars[i].css('padding-top', '200px');
+//        }
     }
 });
