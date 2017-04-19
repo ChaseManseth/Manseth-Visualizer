@@ -33,13 +33,46 @@ function createSegments(numSegments) {
 }
 
 var $segs = 0;
-var snip = 90;
+var snip = 99;
+var n = 5;
 
 // Main render and update method
 function update() {
     analyzer.getByteFrequencyData(dataArray);
+    
+    // Copy the dataArray without high frequencies
+    var low = [];
+    var len = bufferLength - snip;
+    
+    for(var i = 0; i <= len; i++) {
+        low.push(dataArray[i]);
+    }
+    
+    // Use Scott's smoothing function
+    var smooth = [];
+    smooth.push(low[0]);
+    for(var i = 1; i < low.length -1; i += 2) {
+        var mult = 0.5;
+        var c = low[i];
+        var a = (low[i+1] + low[i-1] - 2*low[i]) / 2.0;
+        var b = (low[i+1] - low[i-1]) / 2.0;
+        for(var j = 1; j < n; j++) {
+            smooth.push(a * (1.0/n) * (1.0/n) * j + b * (1.0/n) * (-1) * j + c);
+        }
+//        smooth.push(a * mult * mult + b * mult * (-1) + c);
+        smooth.push(low[i]);
+        for(var j = 1; j < n; j++) {
+            smooth.push(a * (1.0/n) * (1.0/n) * j + b * (1.0/n) * j + c);
+        }
+//        smooth.push(a * mult * mult + b * mult + c);
+        smooth.push(low[i+1]);
+    }
+    
+//    console.log("smooth length : " + smooth.length);
+    
     var a = 0;
-    for(var i = 0; i < bufferLength - snip; i++) {
+    
+    for(var i = 0; i < smooth.length; i++) {
 //        Repeating the same lime sveral times
 //        for(var j = 0; j < 3; j++) {
 //            var width = dataArray[i];
@@ -48,8 +81,15 @@ function update() {
 //            a++;
 //        }
         
-        var width = dataArray[i];        
-        $segs[i].css('height', width);
+        var width = smooth[i];        
+        $segs[a].css('height', width);
+        a++;
+    }
+    
+    for(var i = smooth.length; i > 0; i--) {
+        var width = smooth[i];        
+        $segs[a].css('height', width);
+        a++;
     }
 }
 
@@ -60,17 +100,22 @@ function init() {
     source.connect(analyzer);
     analyzer.connect(AUDIO.destination);
     
-    $segs = createSegments(bufferLength - snip);    
+    $segs = createSegments((((bufferLength - snip) * 2) - 1) * n);    
     style();
-    start();
+    start(true);
 }
 
-function start() {
-    aud.play();
-    setInterval(
-    function() {update();},
-        0.01
-    );
+// Start the 
+var reload;
+function start(x) {
+    if(x) {
+        aud.play();
+        reload = setInterval(function() {update()}, 0.01);
+    } else {
+        aud.pause();
+        clearInterval(reload);
+        reload = null;
+    }
 }
 
 // Rotate and properly position the bars into a circle with a set radius
@@ -93,8 +138,21 @@ function style() {
     }
 }
 
-//aud.addEventListener('loadeddata', init);
+// Toggle the music from playing to paused or vice versa
+function toggleState() {
+    if(aud.paused) {
+        start(true);
+    } else {
+        start(false);
+    }
+}
+
 // When the page loads initiate the program
-$( document ).ready(function() {
+$(document).ready(function() {
     init();
+});
+
+// Toggle played and paused states
+$("#play").click(function() {
+   toggleState(); 
 });

@@ -1,15 +1,18 @@
 body{
-/*    overflow: hidden;*/
+    overflow: hidden;
     margin: 0;
+    background-color: black;
 }
 
 .bar {
     position: fixed;
     height: 1px;
-    width: 6px;
-    background-color: black;
+    width: 3px;
+    background-color: red;
+/*    background: -webkit-linear-gradient(red 25%, black 75%);*/
+/*    background-attachment: fixed;*/
     transform: rotate(90deg);
-    border-top: 3px solid red;
+/*    border-top: 3px solid red;*/
     transform-origin: center top;
 }
 
