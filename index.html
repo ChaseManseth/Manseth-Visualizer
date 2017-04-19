@@ -4,12 +4,19 @@
 		<meta charset=utf-8>
 		<title>Audio Vis Experiment</title>
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
+        
 	</head>
 	<body>
         <audio  id="audio" autoplay>
-            <source src="song5.mp3" type="audio/mpeg">
+            <source src="song3.mp3" type="audio/mpeg">
         </audio>
-        <button id="play">Toggle music state</button>
+        
+        <div class="footer">
+            <div id="play" class="play">
+                <i id="stateicon" class="fa fa-pause-circle-o" aria-hidden="true"></i>
+            </div>
+        </div>
         
         <div id="viz">
 <!--            <img src="trapnation.png" class="mid">-->
@@ -21,5 +28,6 @@
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <!--        <script src="js/main.js"></script>-->
         <script src="js/audio.js"></script>
+        <script src="https://use.fontawesome.com/16c0e3de83.js"></script>
 	</body>
 </html>

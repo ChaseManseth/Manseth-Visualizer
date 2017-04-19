@@ -16,24 +16,27 @@ var viz = document.getElementById('viz'),
     aud = document.getElementById('audio');
 
 // Creates many boxes 
-function createSegments(numSegments) {
-    var segCollection = [];
+function createBars(numBars) {
+    var barCollection = [];
     
-    console.log('numSegments', numSegments);
+    console.log('numBars', numBars);
     
-    for(var i = 0; i < numSegments; i++) {
+    for(var i = 0; i < numBars; i++) {
         var a = document.createElement('div');
         a.classList.add('bar');
         
         viz.appendChild(a);
-        segCollection.push($(a));      
+        barCollection.push($(a));      
     }
     
-    return segCollection;
+    return barCollection;
 }
 
+// $segs is an array of all the bars creates
 var $segs = 0;
+// snip is trimming the last blank buffer length
 var snip = 99;
+// n is the degree of the smoothing algorithm
 var n = 4;
 
 // Main render and update method
@@ -71,21 +74,14 @@ function update() {
 //    console.log("smooth length : " + smooth.length);
     
     var a = 0;
-    
+    // First half going clockwise
     for(var i = 0; i < smooth.length; i++) {
-//        Repeating the same lime sveral times
-//        for(var j = 0; j < 3; j++) {
-//            var width = dataArray[i];
-//        
-//            $segs[a].css('height', width);
-//            a++;
-//        }
-        
         var width = smooth[i];        
         $segs[a].css('height', width);
         a++;
     }
     
+    // Second half going counter-clockwise
     for(var i = smooth.length; i > 0; i--) {
         var width = smooth[i];        
         $segs[a].css('height', width);
@@ -93,6 +89,7 @@ function update() {
     }
 }
 
+// Initiate function
 function init() {
     // Connect audio to analyzer and analyze audio
     console.log('init');
@@ -100,12 +97,12 @@ function init() {
     source.connect(analyzer);
     analyzer.connect(AUDIO.destination);
     
-    $segs = createSegments((((bufferLength - snip) * 2) - 1) * n);    
+    $segs = createBars((((bufferLength - snip) * 2) - 1) * n);    
     style();
     start(true);
 }
 
-// Start the 
+// Start the song is paused and vice versa
 var reload;
 function start(x) {
     if(x) {
@@ -139,20 +136,28 @@ function style() {
 }
 
 // Toggle the music from playing to paused or vice versa
+// It also toggles the state or class of the play button
 function toggleState() {
     if(aud.paused) {
         start(true);
+        $('#stateicon').removeClass('fa fa-play-circle-o');
+        $('#stateicon').addClass('fa fa-pause-circle-o');
     } else {
         start(false);
+        $('#stateicon').removeClass('fa fa-pause-circle-o');
+        $('#stateicon').addClass('fa fa-play-circle-o');
     }
 }
 
 // When the page loads initiate the program
 $(document).ready(function() {
     init();
+    
+    setInterval(function() {console.log(Math.floor(aud.currentTime))}, 1000);
 });
 
 // Toggle played and paused states
-$("#play").click(function() {
-   toggleState(); 
+var play = $("#play");
+play.click(function() {
+    toggleState();
 });

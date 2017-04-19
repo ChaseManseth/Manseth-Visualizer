@@ -8,11 +8,8 @@ body{
     position: fixed;
     height: 1px;
     width: 3px;
-/*    background-color: red;*/
     background: -webkit-linear-gradient(red, white);
-/*    background-attachment: fixed;*/
     transform: rotate(90deg);
-/*    border-top: 3px solid red;*/
     transform-origin: center top;
 }
 
@@ -22,10 +19,26 @@ body{
     margin-top: -25%;
 }
 
-.mid {
+.footer {
     position: absolute;
-    width: 450px;
-    height: auto;
-    margin-top: -20%;
-    margin-left: -20%;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
 }
+
+.play {
+    position: absolute;
+    margin-left: 50%;
+    font-size: 3em;
+    color: rgb(175, 175, 175);
+    padding-top: -15px;
+}
+
+.play:hover {
+    transform: scale(1.1, 1.1);
+    color: rgb(255, 255, 255);
+}
+
+
