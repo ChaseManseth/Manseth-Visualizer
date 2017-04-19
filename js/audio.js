@@ -8,6 +8,7 @@ if(!AUDIO) console.error('Web Audio API not supported :(');
 var analyzer = AUDIO.createAnalyser();
 analyzer.fftSize = 512;
 var bufferLength = analyzer.frequencyBinCount;
+console.log(bufferLength);
 var dataArray = new Uint8Array(bufferLength);
 
 // Cache HTML elements
@@ -24,25 +25,31 @@ function createSegments(numSegments) {
         var a = document.createElement('div');
         a.classList.add('bar');
         
-        
         viz.appendChild(a);
-        segCollection.push($(a));
+        segCollection.push($(a));      
     }
     
     return segCollection;
 }
 
 var $segs = 0;
+var snip = 90;
 
 // Main render and update method
 function update() {
     analyzer.getByteFrequencyData(dataArray);
-    
-    for(var i = 0; i < bufferLength - 90; i++) {
-        var width = dataArray[i];
+    var a = 0;
+    for(var i = 0; i < bufferLength - snip; i++) {
+//        Repeating the same lime sveral times
+//        for(var j = 0; j < 3; j++) {
+//            var width = dataArray[i];
+//        
+//            $segs[a].css('height', width);
+//            a++;
+//        }
         
+        var width = dataArray[i];        
         $segs[i].css('height', width);
-
     }
 }
 
@@ -53,21 +60,23 @@ function init() {
     source.connect(analyzer);
     analyzer.connect(AUDIO.destination);
     
-    $segs = createSegments(bufferLength - 90);
-    
+    $segs = createSegments(bufferLength - snip);    
     style();
-    loop();
+    start();
 }
 
-function loop() {
-    requestAnimationFrame(loop);
+function start() {
     aud.play();
-    update();
+    setInterval(
+    function() {update();},
+        0.01
+    );
 }
 
+// Rotate and properly position the bars into a circle with a set radius
 function style() {
     var step = Math.PI * 2 / $segs.length;
-    var radius = 200;
+    var radius = 160;
     var angle = 0;
     
     for(var i = 0; i < $segs.length; i++) {
@@ -78,20 +87,14 @@ function style() {
         $elem.css('left', x + 'px');
         $elem.css('top', y + 'px');
         var rot = -90 + ((360 / $segs.length) * i);
-//        var rot = 0;
         $elem.css('transform', 'rotate(' + rot + 'deg)'); 
         angle += step;
-        
-//        x = 100 * Math.cos(angle) + 100;
-//        y = 100 * Math.sin(angle) + 100;
-//        $elem.css('position', 'absolute');
-//        $elem.css('left', x + 'px');
-//        $elem.css('top', y + 'px');
-//        //need to work this part out
-//        var rot = 0;
-//        $elem.css('transform', 'rotate(' + rot + 'deg)'); 
-//        angle += increase;
+
     }
 }
 
-aud.addEventListener('loadeddata', init, false);
+//aud.addEventListener('loadeddata', init);
+// When the page loads initiate the program
+$( document ).ready(function() {
+    init();
+});
