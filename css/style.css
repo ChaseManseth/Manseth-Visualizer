@@ -8,8 +8,8 @@ body{
     position: fixed;
     height: 1px;
     width: 3px;
-    background-color: red;
-/*    background: -webkit-linear-gradient(red 25%, black 75%);*/
+/*    background-color: red;*/
+    background: -webkit-linear-gradient(red, white);
 /*    background-attachment: fixed;*/
     transform: rotate(90deg);
 /*    border-top: 3px solid red;*/
