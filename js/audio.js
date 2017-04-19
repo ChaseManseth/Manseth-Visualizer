@@ -34,7 +34,7 @@ function createSegments(numSegments) {
 
 var $segs = 0;
 var snip = 99;
-var n = 5;
+var n = 4;
 
 // Main render and update method
 function update() {
