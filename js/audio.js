@@ -40,10 +40,7 @@ var snip = 99;
 var n = 3;
 
 function degreeSilder(x) {
-    for(var i = 0; i < $segs.length; i++) {
-        $segs[i].css('height', 0);
-    }
-    
+     document.getElementById("viz").innerHTML='';
     $segs = 0;
     $segs = createBars((((bufferLength - snip) * 2) - 1) * x); 
     style();
