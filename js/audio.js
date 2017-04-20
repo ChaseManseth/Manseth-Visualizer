@@ -37,10 +37,22 @@ var $segs = 0;
 // snip is trimming the last blank buffer length
 var snip = 99;
 // n is the degree of the smoothing algorithm
-var n = 4;
+var n = 3;
+
+function degreeSilder(x) {
+    for(var i = 0; i < $segs.length; i++) {
+        $segs[i].css('height', 0);
+    }
+    
+    $segs = 0;
+    $segs = createBars((((bufferLength - snip) * 2) - 1) * x); 
+    style();
+    n = x;
+}
+
 
 // Main render and update method
-function update() {
+function update(b) {
     analyzer.getByteFrequencyData(dataArray);
     
     // Copy the dataArray without high frequencies
@@ -82,7 +94,7 @@ function update() {
     }
     
     // Second half going counter-clockwise
-    for(var i = smooth.length; i > 0; i--) {
+    for(var i = smooth.length - 1; i > 0; i--) {
         var width = smooth[i];        
         $segs[a].css('height', width);
         a++;
@@ -107,7 +119,7 @@ var reload;
 function start(x) {
     if(x) {
         aud.play();
-        reload = setInterval(function() {update()}, 0.01);
+        reload = setInterval(function() {update()}, 10);
     } else {
         aud.pause();
         clearInterval(reload);
@@ -153,7 +165,16 @@ function toggleState() {
 $(document).ready(function() {
     init();
     
-    setInterval(function() {console.log(Math.floor(aud.currentTime))}, 1000);
+    
+    var degSilder = $('#degree');
+    var degVal = $('#degreeVal');
+    degVal.val(degSilder.val());
+    degSilder.on("click", function() {
+        degVal.val(degSilder.val());
+        degreeSilder(degSilder.val());
+    });
+    
+//    setInterval(function() {console.log(Math.floor(aud.currentTime))}, 1000);
 });
 
 // Toggle played and paused states
