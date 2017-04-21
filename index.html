@@ -13,17 +13,36 @@
         </audio>
         
         <div class="footer">
-            <div id="play" class="play">
-                <i id="stateicon" class="fa fa-pause-circle-o" aria-hidden="true"></i>
+            <!-- Play button -->
+            <div class="control">
+                <div id="play" class="play">
+                    <i id="stateicon" class="fa fa-pause-circle-o" aria-hidden="true"></i>
+                </div>
+                <!-- Next button -->
+                <div id="next" class="next">
+                    <i class="fa fa-step-forward" aria-hidden="true"></i>
+                </div>
+                <!-- Prev button -->
+                <div id="prev" class="prev">
+                    <i class="fa fa-step-backward" aria-hidden="true"></i>
+                </div>
             </div>
+            <!-- Degree Silder -->
             <div class="degreeSlider">
-                <input id="degree" type="range" max="5" min="1" value="3">
+                <label for="degree">Change Degree:</label>
+                <input id="degree" type="range" max="10" min="1" value="3">
                 <input id="degreeVal" type="text" disabled>
+            </div>
+            <!-- Volume Slider -->
+            <div class="volumeSlider">
+                <label for="volume">Change Volume:</label>
+                <input id="volume" type="range" max="100" min="0" value="100">
+                <input id="volumeVal" type="text" disabled>
             </div>
         </div>
         
         <div id="viz">
-<!--            <img src="trapnation.png" class="mid">-->
+            
         </div>
         
         

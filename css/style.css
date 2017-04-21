@@ -8,7 +8,7 @@ body{
     position: fixed;
     height: 1px;
     width: 3px;
-    background: -webkit-linear-gradient(red, white);
+    background: -webkit-linear-gradient(red, black);
     transform: rotate(90deg);
     transform-origin: center top;
 }
@@ -25,12 +25,18 @@ body{
     bottom: 0;
     height: 100px;
     width: 100%;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.25);
+    z-index: 9999;
+}
+
+.control {
+    position: absolute;
+    margin-left: 50%;
+    
 }
 
 .play {
     position: absolute;
-    margin-left: 50%;
     font-size: 3em;
     color: rgb(175, 175, 175);
     padding-top: -15px;
@@ -39,6 +45,47 @@ body{
 .play:hover {
     transform: scale(1.1, 1.1);
     color: rgb(255, 255, 255);
+}
+
+.next {
+    position: absolute;
+    margin-left: 75px;
+    font-size: 1.5em;
+    color: rgb(175, 175, 175);
+    padding-top: 15px;
+}
+
+.next:hover {
+    color: rgb(255, 255, 255);
+}
+
+.prev {
+    position: absolute;
+    margin-left: -50px;
+    font-size: 1.5em;
+    color: rgb(175, 175, 175);
+    padding-top: 15px;
+}
+
+.prev:hover {
+    color: rgb(255, 255, 255);
+}
+
+.degreeSlider {
+    color: white;
+    position: absolute;
+    float: left;
+}
+
+.degreeVal {
+    width: 10px;
+}
+
+.volumeSlider {
+    margin-left: 75%;
+    position: absolute;
+    float: right;
+    color: white;
 }
 
 
