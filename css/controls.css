@@ -1,24 +1,9 @@
-body{
-    overflow: hidden;
-    margin: 0;
+html {
     background-color: black;
+/*    overflow: hidden;*/
+    margin: 0;
+    color: white;
 }
-
-.bar {
-    position: fixed;
-    height: 1px;
-    width: 3px;
-    background: -webkit-linear-gradient(red, black);
-    transform: rotate(90deg);
-    transform-origin: center top;
-}
-
-#viz {
-    position: relative;
-    transform: rotate(-90deg);
-    margin-top: -25%;
-}
-
 .footer {
     position: absolute;
     left: 0;
@@ -115,18 +100,3 @@ body{
 .seekSlider > * {
     vertical-align: middle;
 }
-/*
-.degreeSlider {
-    color: white;
-    position: absolute;
-    float: left;
-}
-
-.degreeVal {
-    width: 10px;
-}
-*/
-
-
-
-

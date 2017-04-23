@@ -138,14 +138,21 @@ function init() {
 
 // Start the song is paused and vice versa
 var reload;
+var seek;
 function start(x) {
     if(x) {
         aud.play();
+        // Plays the song
         reload = setInterval(function() {update()}, 10);
+        
+        // Updates the seek bar
+        seek = setInterval(function() {seekBar()}, 1000);
     } else {
         aud.pause();
         clearInterval(reload);
+        clearInterval(seek);
         reload = null;
+        seek = null;
     }
 }
 
@@ -183,6 +190,30 @@ function toggleState() {
     }
 }
 
+function seekBar() {
+    var seek = $('#seek');
+    var bef = $('#bef');
+    var aft = $('#aft');
+    
+    seek.attr("max", Math.floor(aud.duration));            
+    var beforeSec = Math.floor(aud.currentTime);
+    var afterSec = Math.floor(aud.duration);
+    
+    var min = Math.floor(beforeSec / 60);
+    var sec = beforeSec - (60 * min);
+
+    seek.val(beforeSec);
+    bef.html(formatTime(beforeSec));
+    aft.html(formatTime(afterSec));
+}
+
+function formatTime(seconds) {
+    minutes = Math.floor(seconds / 60);
+    seconds = Math.floor(seconds % 60);
+    seconds = (seconds >= 10) ? seconds : "0" + seconds;
+    return minutes + ":" + seconds;
+  }
+
 // When the page loads initiate the program
 $(document).ready(function() {
     init();
@@ -207,9 +238,19 @@ $(document).ready(function() {
             volVal.val(volSlider.val());
             var vol = volSlider.val() / 100;
             aud.volume = vol;
-        });
+        });    
     
-//    setInterval(function() {console.log(Math.floor(aud.currentTime))}, 1000);
+    // Event listeners for the seekbar
+        var seeks = $('#seek');
+        // When the thumb is dropped
+        seeks.on("change", function() {
+            var seekval = seeks.val();
+            aud.currentTime = parseInt(seekval, 10);
+            seekBar();
+        });
+
+        
+
 });
 
 // Event listener for space keypress to play and pause
