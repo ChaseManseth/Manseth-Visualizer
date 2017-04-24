@@ -9,8 +9,12 @@
 	</head>
 	<body>
         <audio  id="audio" autoplay>
-            <source src="song5.mp3" type="audio/mpeg">
+            <source src="song4.mp3" type="audio/mpeg">
         </audio>
+        
+        <div class="settings">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+        </div>
         
         <div class="footer container-fluid">
             <div class="row">
@@ -89,9 +93,31 @@
         
         
         
+        
+        
+        
+        <!-- Modals -->
+        <div id="set" class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+                <h4 class="modal-title">Settings</h4>
+              </div>
+              <div class="modal-body">
+                <p>One fine body&hellip;</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        
+        
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<!--        <script src="js/main.js"></script>-->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script src="js/audio.js"></script>
         <script src="https://use.fontawesome.com/16c0e3de83.js"></script>
 	</body>

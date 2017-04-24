@@ -115,6 +115,32 @@ body{
 .seekSlider > * {
     vertical-align: middle;
 }
+
+.settings {
+    color: rgba(255, 255, 255, 0.7);
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 2em;
+    margin-left: 96%;
+}
+
+.modal-content {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+.close {
+    opacity: 1;
+    border: 0;
+}
+.modal-header i{
+    color: rgba(255,255,255,1) !important;
+}
+
+.modal-header i:hover {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
 /*
 .degreeSlider {
     color: white;
@@ -122,7 +148,7 @@ body{
     float: left;
 }
 
-.degreeVal {
+.degreeVal { 
     width: 10px;
 }
 */

@@ -265,3 +265,9 @@ var play = $("#play");
 play.click(function() {
     toggleState();
 });
+
+// Show the settings modal
+var setting = $('.settings');
+setting.on("click", function() {
+    $('#set').modal('show')
+});
