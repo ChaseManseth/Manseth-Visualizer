@@ -51,7 +51,7 @@ function degreeSlider(x) {
         document.getElementById("viz").innerHTML='';
         // Sets the seg array to 0 and creates them again with the proper amount of segs
         $bars = 0;
-        $bars = createBars((((bufferLength - snip) -1) * 2) * x);
+        $bars = createBars((((bufferLength - snip) - 1) * 2) * x);
         // Restyle it because we have more or less segs now and must adjust
         style();
         n = x;
@@ -60,7 +60,7 @@ function degreeSlider(x) {
         document.getElementById("viz").innerHTML='';
         // Sets the seg array to 0 and creates them again with the proper amount of segs
         $bars = 0;
-        $bars = createBars((((bufferLength - snip) -1) * 2) * x);
+        $bars = createBars((((bufferLength - snip) - 1) * 2) * x);
         // Restyle it because we have more or less segs now and must adjust
         style();
         n = x;
@@ -131,7 +131,7 @@ function init() {
     source.connect(analyser);
     analyser.connect(AUDIO.destination);
     
-    $bars = createBars((((bufferLength - snip) -1) * 2) * n);  
+    $bars = createBars((((bufferLength - snip) - 1) * 2) * n);  
     style();
     start(true);
 }
@@ -218,14 +218,19 @@ function formatTime(seconds) {
 $(document).ready(function() {
     init();
     
+    // Bootstrap tooltip
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    });
+    
     // Degree Slider
         // Get the silder and the input to store values
         var degSlider = $('#degree');
-        var degVal = $('#degreeVal');
-        degVal.val(degSlider.val());
+        var degVal = $('.degval');
+        degVal.html("Current Value: " + degSlider.val());
         // When ever the silder is used change value in the input and run function to reload
         degSlider.on("change", function() {
-            degVal.val(degSlider.val());
+            degVal.html("Current Value: " + degSlider.val());
             degreeSlider(degSlider.val());
         });
     

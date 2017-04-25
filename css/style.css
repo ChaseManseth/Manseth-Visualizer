@@ -1,5 +1,5 @@
 body{
-    overflow: hidden;
+/*    overflow: hidden;*/
     margin: 0;
     background-color: black;
 }
@@ -126,7 +126,7 @@ body{
 }
 
 .modal-content {
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.2);
     color: white;
     border: 1px solid white;
 }
@@ -141,6 +141,20 @@ body{
 .modal-header i:hover {
     color: rgba(255, 255, 255, 0.5) !important;
 }
+
+.modal-lg {
+    width: 90%;
+}
+
+.tooltip-inner {
+    background-color: white;
+    color: black;
+}
+
+.tooltip-arrow {
+    border-right-color: none;
+}
+
 /*
 .degreeSlider {
     color: white;
