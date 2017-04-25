@@ -1,5 +1,5 @@
 body{
-/*    overflow: hidden;*/
+    overflow: hidden;
     margin: 0;
     background-color: black;
 }
@@ -109,7 +109,7 @@ body{
     margin-left: 10px;
 }
 .seek {
-    width: 650px !important;
+    width: 500px !important;
 }
 
 .seekSlider > * {
@@ -144,6 +144,10 @@ body{
 
 .modal-lg {
     width: 90%;
+}
+
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .tooltip-inner {

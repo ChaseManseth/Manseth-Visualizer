@@ -11,7 +11,7 @@
 	</head>
 	<body>
         <audio  id="audio" autoplay>
-            <source src="song4.mp3" type="audio/mpeg">
+            <source src="song2.mp3" type="audio/mpeg">
         </audio>
         
         <div class="settings">
@@ -115,7 +115,14 @@
                                 <p class="degval">Current Value: 3</p>
                             </div>
                         </div>
-                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <div id="degreeWarning" class="alert alert-warning alert-dismissible" role="alert">
+                                <button type="button" class="close alertClose" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <strong>Warning!</strong> increasing the degree over 5 may lag out your browser. Are you sure you want to procede?
+                                <button id="degYes" type="button" class="btn btn-success">Yes</button>
+                                <button id="degNo" type="button" class="btn btn-danger">No</button>
+                            </div>
+                        </div>
                         <div class="col-md-3">
                             Content for the right side
                         </div>
@@ -125,6 +132,10 @@
             </div>
           </div>
         </div>
+        
+        
+        <!-- Alerts -->
+        
         
         
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>

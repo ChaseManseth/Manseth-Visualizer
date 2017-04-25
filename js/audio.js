@@ -37,15 +37,27 @@ var snip = 99;
 // n is the degree of the smoothing algorithm
 var n = 3;
 
+// Verify degree
 // Ask a question once for higher degrees
-var ans = "false";
+var ans = false;
 function degreeSlider(x) {
-    if(x > 5 && ans === "false") {
+    if(x > 5 && !ans) {
         toggleState();
-        ans = prompt("Warning, increasing the degree over 5 may lag out your browser. Are you sure you want to procede? Type true or false for your response");
+        $('#degreeWarning').show();
+        // User answers yes
+        $("#degYes").on("click", function() {
+            ans = true;
+            $('#degreeWarning').hide();
+        });
+        // Users answers no
+        $("#degNo").on("click", function() {
+            ans = false;
+            $('#degreeWarning').hide();
+        });
         toggleState();
     }
     
+    // If the user has already answered don't ask again
     if(ans) {
         // Removes all elements
         document.getElementById("viz").innerHTML='';
@@ -254,8 +266,8 @@ $(document).ready(function() {
             seekBar();
         });
 
-        
-
+        // Hide all alerts
+        $('#degreeWarning').hide();
 });
 
 // Event listener for space keypress to play and pause
@@ -276,3 +288,4 @@ var setting = $('.settings');
 setting.on("click", function() {
     $('#set').modal('show')
 });
+
