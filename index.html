@@ -83,6 +83,8 @@
             </div>
         </div>
         
+        
+        <!-- Where the magic happens -->
         <div id="viz">
             
         </div>
@@ -101,7 +103,7 @@
                 <h4 class="modal-title text-center">Settings</h4>
               </div>
               <div class="modal-body">
-<!--                  Content of the settings-->
+                <!-- Content of the settings-->
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-3">
@@ -113,15 +115,15 @@
                                 </label>
                                 <input id="degree" type="range" max="10" min="1" value="3">
                                 <p class="degval">Current Value: 3</p>
-                            </div>
+                            </div> <!-- End Degree Slider --> 
                         </div>
                         <div class="col-md-6">
-                            <div id="degreeWarning" class="alert alert-warning alert-dismissible" role="alert">
-                                <button type="button" class="close alertClose" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <strong>Warning!</strong> increasing the degree over 5 may lag out your browser. Are you sure you want to procede?
+                            <!-- Degree Warning -->
+                            <div id="degreeWarning" class="alert alert-danger" role="alert">
+                                <strong>Warning!</strong> Increasing the smoothness over 5 may slow down the animation. Are you sure you want to procede?<br>
                                 <button id="degYes" type="button" class="btn btn-success">Yes</button>
                                 <button id="degNo" type="button" class="btn btn-danger">No</button>
-                            </div>
+                            </div> <!-- End Degree Warning -->
                         </div>
                         <div class="col-md-3">
                             Content for the right side
@@ -132,15 +134,12 @@
             </div>
           </div>
         </div>
-        
-        
-        <!-- Alerts -->
-        
-        
+
         
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="js/songs.js"></script>
         <script src="js/audio.js"></script>
         <script src="https://use.fontawesome.com/16c0e3de83.js"></script>
 	</body>

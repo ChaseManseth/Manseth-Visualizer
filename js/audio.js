@@ -40,35 +40,43 @@ var n = 3;
 // Verify degree
 // Ask a question once for higher degrees
 var ans = false;
-function degreeSlider(x) {
-    if(x > 5 && !ans) {
-        toggleState();
-        $('#degreeWarning').show();
-        // User answers yes
-        $("#degYes").on("click", function() {
-            ans = true;
-            $('#degreeWarning').hide();
-        });
-        // Users answers no
-        $("#degNo").on("click", function() {
-            ans = false;
-            $('#degreeWarning').hide();
-        });
-        toggleState();
-    }
-    
-    // If the user has already answered don't ask again
-    if(ans) {
-        // Removes all elements
-        document.getElementById("viz").innerHTML='';
-        // Sets the seg array to 0 and creates them again with the proper amount of segs
-        $bars = 0;
-        $bars = createBars((((bufferLength - snip) - 1) * 2) * x);
-        // Restyle it because we have more or less segs now and must adjust
-        style();
-        n = x;
+function degreeSet(x) {
+    if(x > 5) {
+        if(!ans) {
+            toggleState(); // Pause
+            $('#degreeWarning').show();
+            
+            // User answers yes
+            $("#degYes").on("click", function() {
+                ans = true;
+                $('#degreeWarning').hide();
+                degreeSet(x);
+            });
+            
+            // Users answers no
+            $("#degNo").on("click", function() {
+                ans = false;
+                $('#degreeWarning').hide();
+                degreeSet(3);
+                
+                // Set the input bar back to three
+                $('#degree').val(3);
+                $(".degval").html("Current Value: " + $('#degree').val());
+            });
+            
+            toggleState(); // Play
+        } else {
+            // Removes all elements
+            document.getElementById("viz").innerHTML='';
+            // Sets the seg array to 0 and creates them again with the proper amount of segs
+            $bars = 0;
+            $bars = createBars((((bufferLength - snip) - 1) * 2) * x);
+            // Restyle it because we have more or less segs now and must adjust
+            style();
+            n = x;
+        } 
     } else {
-        // Removes all elements
+         // Removes all elements
         document.getElementById("viz").innerHTML='';
         // Sets the seg array to 0 and creates them again with the proper amount of segs
         $bars = 0;
@@ -116,13 +124,10 @@ function update() {
     
     // Translate modified array
     var a = 0;
-    if(a >= $bars.length) {
-        a = 0;
-    }
+    
     // First half going clockwise
     for(var i = 0; i < smooth.length; i++) {
         var width = smooth[i]; 
-//        console.log("i: " + i + " || "+ width);
         $bars[a].css('height', width);
         a++;
     }
@@ -134,6 +139,7 @@ function update() {
         a++;
     }
 }
+
 
 // Initiate function
 function init() {
@@ -219,12 +225,32 @@ function seekBar() {
     aft.html(formatTime(afterSec));
 }
 
+// Formats time
 function formatTime(seconds) {
     minutes = Math.floor(seconds / 60);
     seconds = Math.floor(seconds % 60);
     seconds = (seconds >= 10) ? seconds : "0" + seconds;
     return minutes + ":" + seconds;
-  }
+}
+
+function nextSong() {
+//    var songList = [defaultSongs.one.src, defaultSongs.two.src, defaultSongs.three.src, defaultSongs.four.src, defaultSongs.five.src];
+//    var start = 1;
+//    if(start > songList.length - 1) {
+//        start = 0;
+//    }
+//    var pick = songList[start];
+    
+    aud.src = "song3.mp3";
+    init();
+}
+
+
+
+
+
+
+// Event listeners and other functions to perform when the page loads
 
 // When the page loads initiate the program
 $(document).ready(function() {
@@ -243,7 +269,7 @@ $(document).ready(function() {
         // When ever the silder is used change value in the input and run function to reload
         degSlider.on("change", function() {
             degVal.html("Current Value: " + degSlider.val());
-            degreeSlider(degSlider.val());
+            degreeSet(degSlider.val());
         });
     
     // Volume Slider
@@ -270,6 +296,7 @@ $(document).ready(function() {
         $('#degreeWarning').hide();
 });
 
+
 // Event listener for space keypress to play and pause
 $(document).keypress(function(e) {
   if(e.which == 32) {
@@ -288,4 +315,11 @@ var setting = $('.settings');
 setting.on("click", function() {
     $('#set').modal('show')
 });
+
+// Play the next song
+var next = $("#next");
+next.on("click", function(){
+    nextSong();
+});
+
 
