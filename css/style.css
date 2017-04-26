@@ -2,6 +2,7 @@ body{
     overflow: hidden;
     margin: 0;
     background-color: black;
+    color: white !important;
 }
 
 .bar {
@@ -157,6 +158,10 @@ body{
 
 .tooltip-arrow {
     border-right-color: none;
+}
+
+.info {
+    color: white !important;
 }
 
 /*

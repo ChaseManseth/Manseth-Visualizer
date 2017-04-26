@@ -143,6 +143,7 @@ function update() {
 
 // Initiate function
 function init() {
+    pickSong();
     // Connect audio to analyser and analyze audio
     console.log('init');
     var source = AUDIO.createMediaElementSource(aud);
@@ -157,6 +158,7 @@ function init() {
 // Start the song is paused and vice versa
 var reload;
 var seek;
+var end;
 function start(x) {
     if(x) {
         aud.play();
@@ -164,13 +166,18 @@ function start(x) {
         reload = setInterval(function() {update()}, 10);
         
         // Updates the seek bar
-        seek = setInterval(function() {seekBar()}, 1000);
+        seek = setInterval(function() {seekBar()}, 500);
+        
+        // Checks if the song has ended
+        end = setInterval(function() {ended()}, 1000);
     } else {
         aud.pause();
         clearInterval(reload);
         clearInterval(seek);
+        clearInterval(end);
         reload = null;
         seek = null;
+        end = null;
     }
 }
 
@@ -208,6 +215,7 @@ function toggleState() {
     }
 }
 
+// Update the seekBar information such as time and position of the slider
 function seekBar() {
     var seek = $('#seek');
     var bef = $('#bef');
@@ -233,18 +241,77 @@ function formatTime(seconds) {
     return minutes + ":" + seconds;
 }
 
-function nextSong() {
-//    var songList = [defaultSongs.one.src, defaultSongs.two.src, defaultSongs.three.src, defaultSongs.four.src, defaultSongs.five.src];
-//    var start = 1;
-//    if(start > songList.length - 1) {
-//        start = 0;
-//    }
-//    var pick = songList[start];
-    
-    aud.src = "song3.mp3";
-    init();
+// Checks if the song has ended and if so it plays the next song
+function ended() {
+    if(aud.ended) {
+        nextSong();
+    }
 }
 
+// Get the current value 
+function currentSong() {
+    var src = aud.src;
+    var index = -1;
+    // Get the current index of the song playing
+    for(var i = 0; i < srcList.length; i++) {
+        if(src === srcList[i]) {
+            index = i;
+        } 
+    }
+    
+    return index;
+}
+
+// Get Current song Index
+var curIndex = currentSong();
+// Increment it by one if out of bounds set to 0
+function nextSong() {
+    if(curIndex + 1 == srcList.length) {
+        curIndex = 0;
+    } else {
+        ++curIndex;
+    }
+    
+//    console.log(srcList[curIndex]);
+    aud.src = srcList[curIndex];
+    getInfo();
+}
+
+// Play the previous song
+function prevSong() {
+    if(aud.currentTime > 5 ) {
+        aud.currentTime = 0;
+    } else {
+        if(curIndex - 1 < 0) {
+            curIndex = srcList.length - 1;
+        } else {
+            --curIndex;
+        }
+        
+//        console.log(srcList[curIndex]);
+        aud.src = srcList[curIndex];
+        getInfo();
+    }
+}
+
+// Pick a random song
+function pickSong() {
+    var rand = Math.floor(Math.random() * srcList.length);
+    curIndex = rand;
+    
+//    console.log(srcList[curIndex]);
+    aud.src = srcList[curIndex];
+    getInfo();
+}
+
+// Get information i.e Artist and title rn
+function getInfo() {
+    var title = titleList[curIndex];
+    var artist = artistList[curIndex];
+    
+    $('.title').html(title);
+    $('.artist').html(artist);
+}
 
 
 
@@ -319,7 +386,21 @@ setting.on("click", function() {
 // Play the next song
 var next = $("#next");
 next.on("click", function(){
+    toggleState();
+    
     nextSong();
+    
+    toggleState();
+});
+
+// Play previous song or restart current song. Depends on the time value
+var previous = $("#prev");
+previous.on("click", function() {
+    toggleState();
+    
+    prevSong();
+    
+    toggleState();
 });
 
 
