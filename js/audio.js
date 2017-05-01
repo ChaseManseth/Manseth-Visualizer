@@ -1,5 +1,5 @@
 // Create audio context
-var AUDIO = new (window.AudioContext || window.webkitAudioContext)();
+var AUDIO = new AudioContext();
 if (!AUDIO) {console.error('Web Audio API not supported :(');}
 
 // Create and configure analyser node and storage buffer
@@ -245,6 +245,7 @@ function formatTime(seconds) {
 function ended() {
     if(aud.ended) {
         nextSong();
+        start(true);
     }
 }
 
@@ -322,6 +323,7 @@ function getInfo() {
 // When the page loads initiate the program
 $(document).ready(function() {
     init();
+    
     
     // Bootstrap tooltip
     $(function () {
@@ -403,4 +405,9 @@ previous.on("click", function() {
     toggleState();
 });
 
+// Show the upload song modal
+var upl = $('#upload');
+upl.on("click", function() {
+    $('#uploadSong').modal('show')
+});
 

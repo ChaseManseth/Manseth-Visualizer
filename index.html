@@ -1,163 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset=utf-8>
-		<title>Audio Vis Experiment</title>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        
-        <link rel="stylesheet" href="css/style.css">
-<!--        <link rel="stylesheet" href="css/input.css">-->
-        <meta name="google-site-verification" content="e0pr5rbrwdkt0iIZu92S2DPb3lCVXY01wFjypyhb-yo" />
-        
-        <!-- Google Analytics -->
-        <script>
-          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-          ga('create', 'UA-98201458-1', 'auto');
-          ga('send', 'pageview');
-        </script>
-        
-        
-	</head>
-	<body>
-        <audio  id="audio" autoplay>
-            
-        </audio>
-        
-        <div class="settings">
-            <i class="fa fa-cog" aria-hidden="true"></i>
-        </div>
-        
-        <div class="footer container-fluid">
-            <div class="row">
-                <div class="col-md-3 info">
-                    <h4 class="title"></h4>
-                    <h5 class="artist"></h5>
-                </div>
-                <div class="col-md-6">
-                    <!-- Controls -->
-                    <div class="text-center">
-                        <!-- Prev button -->
-                        <div class="box">
-                            <div id="prev" class="prev">
-                                <i class="fa fa-step-backward" aria-hidden="true"></i>
-                            </div>
+<head>
+    <meta charset=utf-8>
+    <title>Audio Vis Experiment</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="css/dropzone.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/dropzone.js"></script>
+    
+    <!--        <link rel="stylesheet" href="css/input.css">-->
+    <meta name="google-site-verification" content="e0pr5rbrwdkt0iIZu92S2DPb3lCVXY01wFjypyhb-yo" />
+
+    <!-- Google Analytics -->
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-98201458-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+
+</head>
+
+<body>
+    <audio id="audio"></audio>
+
+    <!-- Add an upload function-->
+    <div class="upload">
+        <div id="upload" class="btn btn-danger outline">Upload music</div>
+    </div>
+
+    <!--        Settings -->
+    <div class="settings">
+        <i class="fa fa-cog" aria-hidden="true"></i>
+    </div>
+    <div class="footer container-fluid">
+        <div class="row">
+            <div class="col-md-3 info">
+                <h4 class="title"></h4>
+                <h5 class="artist"></h5>
+            </div>
+            <div class="col-md-6">
+                <!-- Controls -->
+                <div class="text-center">
+                    <!-- Prev button -->
+                    <div class="box">
+                        <div id="prev" class="prev">
+                            <i class="fa fa-step-backward" aria-hidden="true"></i>
                         </div>
-                        <!-- Play Button-->
-                        <div class="box">
-                            <div id="play" class="play">
-                                <i id="stateicon" class="fa fa-pause-circle-o" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        <!-- Next button -->
-                        <div class="box">
-                            <div id="next" class="next">
-                                <i class="fa fa-step-forward" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        
                     </div>
+                    <!-- Play Button-->
+                    <div class="box">
+                        <div id="play" class="play">
+                            <i id="stateicon" class="fa fa-pause-circle-o" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <!-- Next button -->
+                    <div class="box">
+                        <div id="next" class="next">
+                            <i class="fa fa-step-forward" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="col-md-3">
-                    <!-- Volume Slider -->
-                    <div class="volumeSlider text-center">
-                        <div class="volBox">
-                            <div class="lowvol">
-                                <i class="fa fa-volume-down" aria-hidden="true"></i>
-                            </div>
+            </div>
+            <div class="col-md-3">
+                <!-- Volume Slider -->
+                <div class="volumeSlider text-center">
+                    <div class="volBox">
+                        <div class="lowvol">
+                            <i class="fa fa-volume-down" aria-hidden="true"></i>
                         </div>
-                        <div class="volBox">
-                            <input id="volume" class="volume" type="range" max="100" min="0" value="100">
-                        </div>
-                        <div class="volBox">
-                            <div class="highvol">
-                                <i class="fa fa-volume-up" aria-hidden="true"></i>
-                            </div>
+                    </div>
+                    <div class="volBox">
+                        <input id="volume" class="volume" type="range" max="100" min="0" value="100">
+                    </div>
+                    <div class="volBox">
+                        <div class="highvol">
+                            <i class="fa fa-volume-up" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="row">
-                <div class="col-md-offset-3 col-md-6">
-                    <!-- Seek Slider -->
-                    <div class="seekSlider text-center">
-                        <div class="seekbox">
-                            <p id="bef" class="bef">0:00</p>
-                        </div>
-                        <div class="seekbox">
-                            <input id="seek" class="seek" type="range" min="0" value="0">
-                        </div>
-                        <div class="seekbox">
-                            <p id="aft" class="aft">0:00</p>
-                        </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+                <!-- Seek Slider -->
+                <div class="seekSlider text-center">
+                    <div class="seekbox">
+                        <p id="bef" class="bef">0:00</p>
+                    </div>
+                    <div class="seekbox">
+                        <input id="seek" class="seek" type="range" min="0" value="0">
+                    </div>
+                    <div class="seekbox">
+                        <p id="aft" class="aft">0:00</p>
                     </div>
                 </div>
             </div>
         </div>
-        
-        
-        <!-- Where the magic happens -->
-        <div id="viz">
-            
-        </div>
-        
-        
-        
-        
-        
-        
-        <!-- Settings Modal -->
-        <div id="set" class="modal fade" tabindex="-1" role="dialog">
-          <div class="modal-dialog modal-lg" role="document">
+    </div>
+
+
+    <!-- Where the magic happens -->
+    <div id="viz">
+
+    </div>
+
+
+
+
+
+
+    <!-- Settings Modal -->
+    <div id="set" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
-                <h4 class="modal-title text-center">Settings</h4>
-              </div>
-              <div class="modal-body">
-                <!-- Content of the settings-->
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <!--  Degree Slider -->
-                            <div class="degreeSlider">
-                                <label for="degree">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    <h4 class="modal-title text-center">Settings</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- Content of the settings-->
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <!--  Degree Slider -->
+                                <div class="degreeSlider">
+                                    <label for="degree">
                                     Change Degree: 
                                     <a href="#" data-toggle="tooltip" data-placement="right" title="Changes the amount of bars in the visualiser."><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                 </label>
-                                <input id="degree" type="range" max="10" min="1" value="3">
-                                <p class="degval">Current Value: 3</p>
-                            </div> <!-- End Degree Slider --> 
-                        </div>
-                        <div class="col-md-6">
-                            <!-- Degree Warning -->
-                            <div id="degreeWarning" class="alert alert-danger" role="alert">
-                                <strong>Warning!</strong> Increasing the smoothness over 5 may slow down the animation. Are you sure you want to procede?<br>
-                                <button id="degYes" type="button" class="btn btn-success">Yes</button>
-                                <button id="degNo" type="button" class="btn btn-danger">No</button>
-                            </div> <!-- End Degree Warning -->
-                        </div>
-                        <div class="col-md-3">
-                            
+                                    <input id="degree" type="range" max="10" min="1" value="3">
+                                    <p class="degval">Current Value: 3</p>
+                                </div>
+                                <!-- End Degree Slider -->
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Degree Warning -->
+                                <div id="degreeWarning" class="alert alert-danger" role="alert">
+                                    <strong>Warning!</strong> Increasing the smoothness over 5 may slow down the animation. Are you sure you want to procede?<br>
+                                    <button id="degYes" type="button" class="btn btn-success">Yes</button>
+                                    <button id="degNo" type="button" class="btn btn-danger">No</button>
+                                </div>
+                                <!-- End Degree Warning -->
+                            </div>
+                            <div class="col-md-3">
+
+                            </div>
                         </div>
                     </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
+    </div>
+    
+    <!-- Upload Modal -->
+    <div id="uploadSong" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    <h4 class="modal-title text-center">Upload a Song</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="upload.php" method="post" enctype="multipart/form-data">
+                        Select image to upload:
+                        <input type="file" name="fileToUpload" id="fileToUpload">
+                        <input type="submit" value="Upload Song" name="submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script src="js/songs.js"></script>
-        <script src="js/audio.js"></script>
-        <script src="https://use.fontawesome.com/16c0e3de83.js"></script>
-        
-	</body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+    <script src="js/songs.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="https://use.fontawesome.com/16c0e3de83.js"></script>
+    
+    <script type="text/javascript">
+        Dropzone.options.ups = {
+          paramName: "file", // The name that will be used to transfer the file
+          maxFilesize: 1// MB
+        };
+    </script>
+
+</body>
+
 </html>

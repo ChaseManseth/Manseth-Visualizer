@@ -1,6 +1,6 @@
 var defaultSongs = {
     one: {
-        title: "Vessel [NCS Release]",
+        title: "Vessel opps [NCS Release]",
         artist: "Ship Wrek, Zookeepers & Trauzers",
         coverImage: "",
         src: "music/song1.mp3"
