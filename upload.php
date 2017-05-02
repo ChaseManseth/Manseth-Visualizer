@@ -1,6 +1,6 @@
 <?php
  
-$uploaddir = '/Users/Chase/Desktop/Testing/uploads/';
+$uploaddir = '/uploads/';
 $uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
 
 echo '<pre>';
