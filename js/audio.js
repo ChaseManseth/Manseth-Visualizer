@@ -105,7 +105,7 @@ function update() {
     smooth.push(Math.floor(low[0]));
     
     for(var i = 1; i < low.length - 1; i += 2) {
-
+        
         var c = low[i];
         var a = (low[i+1] + low[i-1] - 2*low[i]) / 2.0;
         var b = (low[i+1] - low[i-1]) / 2.0;
@@ -408,6 +408,6 @@ previous.on("click", function() {
 // Show the upload song modal
 var upl = $('#upload');
 upl.on("click", function() {
-    $('#uploadSong').modal('show')
+    $('#uploadSong').modal('show');
 });
 

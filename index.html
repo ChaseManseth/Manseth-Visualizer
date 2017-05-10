@@ -5,11 +5,11 @@
     <meta charset=utf-8>
     <title>Audio Vis Experiment</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    
+
     <link rel="stylesheet" href="css/dropzone.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/dropzone.js"></script>
-    
+
     <!--        <link rel="stylesheet" href="css/input.css">-->
     <meta name="google-site-verification" content="e0pr5rbrwdkt0iIZu92S2DPb3lCVXY01wFjypyhb-yo" />
 
@@ -168,7 +168,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Upload Modal -->
     <div id="uploadSong" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
@@ -178,11 +178,14 @@
                     <h4 class="modal-title text-center">Upload a Song</h4>
                 </div>
                 <div class="modal-body">
+<!--
                     <form action="upload.php" method="post" enctype="multipart/form-data">
                         Select image to upload:
                         <input type="file" name="fileToUpload" id="fileToUpload">
                         <input type="submit" value="Upload Song" name="submit">
                     </form>
+-->
+                    <form action="upload.php" class="dropzone" id="ups"></form>
                 </div>
             </div>
         </div>
@@ -192,16 +195,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    
+
     <script src="js/songs.js"></script>
     <script src="js/audio.js"></script>
     <script src="https://use.fontawesome.com/16c0e3de83.js"></script>
-    
+
     <script type="text/javascript">
         Dropzone.options.ups = {
-          paramName: "file", // The name that will be used to transfer the file
-          maxFilesize: 1// MB
+            paramName: "file", 
+            acceptedFiles: "audio/*",
+            complete: function(file) {
+                toggleState();
+                aud.src = "uploads/" + file.name;
+                setTimeout(
+                function() {
+                    toggleState();
+                },
+                    1000
+                );
+                
+                $('#uploadSong').modal('hide');
+               
+            }
         };
+
     </script>
 
 </body>
