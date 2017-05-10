@@ -2,7 +2,7 @@ body{
     overflow: hidden;
     margin: 0;
     background-color: black;
-    color: white !important;
+    color: white;
 }
 
 .bar {
@@ -185,6 +185,9 @@ body{
     box-shadow: none;
 }
 
+.dz-message {
+    color: black !important;
+}
 
 
 /*

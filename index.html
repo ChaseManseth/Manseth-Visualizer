@@ -7,8 +7,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <link rel="stylesheet" href="css/dropzone.css">
-    <link rel="stylesheet" href="css/style.css">
     <script src="js/dropzone.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 
     <!--        <link rel="stylesheet" href="css/input.css">-->
     <meta name="google-site-verification" content="e0pr5rbrwdkt0iIZu92S2DPb3lCVXY01wFjypyhb-yo" />
@@ -185,7 +185,9 @@
                         <input type="submit" value="Upload Song" name="submit">
                     </form>
 -->
-                    <form action="upload.php" class="dropzone" id="ups"></form>
+                    <form action="upload.php" class="dropzone" id="ups">
+                        <div class="dz-message" data-dz-message><span>Your Custom Message</span></div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -218,7 +220,14 @@
                
             }
         };
-
+        
+        
+        window.addEventListener("onload", function (e) {
+            $.get("remove.php");
+        });
+        window.addEventListener("beforeunload", function (e) {
+            $.get("remove.php");
+        });
     </script>
 
 </body>
