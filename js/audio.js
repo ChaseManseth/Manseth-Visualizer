@@ -411,3 +411,24 @@ upl.on("click", function() {
     $('#uploadSong').modal('show');
 });
 
+
+
+// Seekbar code 
+//var $projectBar = $(this).find('.barsl');
+//    var $projectPercent = $(this).find('.percent');
+//    var $projectRange = $(this).find('.ui-slider-range');
+//    $projectBar.slider({
+//      range: "min",
+//      animate: true,
+//      value: 0,
+//      min: 0,
+//      max: 100,
+//      step: 1,
+//      change: function(event, ui) {
+//        var $projectRange = $(this).find('.ui-slider-range');
+//        var percent = ui.value;
+//        $projectRange.css({
+//            'background': '#f20000'
+//          }); 
+//      }
+//    });

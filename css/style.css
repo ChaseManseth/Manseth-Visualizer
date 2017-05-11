@@ -10,8 +10,10 @@ body{
     height: 1px;
     width: 3px;
     background: -webkit-linear-gradient(red, black);
+    background: -moz-linear-gradient(red, black);
     transform: rotate(90deg);
     transform-origin: center top;
+    
 }
 
 #viz {
@@ -124,7 +126,9 @@ body{
     height: 50px;
     text-align: center;
     font-size: 2em;
-    margin-left: 96%;
+    margin-left: 97%;
+    margin-top: -50px;
+    
 }
 
 .modal-content {
@@ -189,7 +193,10 @@ body{
     color: black !important;
 }
 
-
+.ui-slider-range {
+   background: green;
+}
+ 
 /*
 .degreeSlider {
     color: white;

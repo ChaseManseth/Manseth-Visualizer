@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/dropzone.css">
     <script src="js/dropzone.js"></script>
     <link rel="stylesheet" href="css/style.css">
+    <link rel='stylesheet prefetch' href='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
 
     <!--        <link rel="stylesheet" href="css/input.css">-->
     <meta name="google-site-verification" content="e0pr5rbrwdkt0iIZu92S2DPb3lCVXY01wFjypyhb-yo" />
@@ -38,10 +39,12 @@
 <body>
     <audio id="audio"></audio>
 
-    <!-- Add an upload function-->
+    <!-- Add an upload function -->
     <div class="upload">
         <div id="upload" class="btn btn-danger outline">Upload music</div>
     </div>
+    
+    <div class="barsl"></div>
 
     <!--        Settings -->
     <div class="settings">
@@ -178,7 +181,7 @@
                     <h4 class="modal-title text-center">Upload a Song</h4>
                 </div>
                 <div class="modal-body">
-<!--
+                    <!--
                     <form action="upload.php" method="post" enctype="multipart/form-data">
                         Select image to upload:
                         <input type="file" name="fileToUpload" id="fileToUpload">
@@ -186,7 +189,7 @@
                     </form>
 -->
                     <form action="upload.php" class="dropzone" id="ups">
-                        <div class="dz-message" data-dz-message><span>Your Custom Message</span></div>
+                        <div class="dz-message" data-dz-message><span>Drag and Drop files to upload or click this box to select files</span></div>
                     </form>
                 </div>
             </div>
@@ -197,6 +200,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 
     <script src="js/songs.js"></script>
     <script src="js/audio.js"></script>
@@ -204,30 +208,44 @@
 
     <script type="text/javascript">
         Dropzone.options.ups = {
-            paramName: "file", 
+            paramName: "file",
             acceptedFiles: "audio/*",
             complete: function(file) {
                 toggleState();
                 aud.src = "uploads/" + file.name;
-                setTimeout(
-                function() {
-                    toggleState();
-                },
-                    1000
-                );
                 
+                var uploadName = file.name;
+                var uploadTitle = uploadName.split(" - ");
+                console.log(uploadTitle);
+                if(uploadTitle.length < 2) {
+                    $('.title').html(file.name);
+                    $('.artist').html("Uploaded audio file");
+                } else if(uploadTitle.length > 2) {
+                    $('.title').html(file.name);
+                    $('.artist').html("Uploaded audio file");
+                } else {
+                    var removeExt = uploadTitle[1].slice(0, uploadTitle[1].length - 4);
+                    $('.title').html(removeExt);
+                    $('.artist').html(uploadTitle[0]);
+                }
+                
+                setTimeout(
+                    function() {
+                        toggleState();
+                    },
+                    500
+                );
+
                 $('#uploadSong').modal('hide');
-               
+
             }
         };
-        
-        
-        window.addEventListener("onload", function (e) {
+
+
+        window.addEventListener("beforeunload", function() {
             $.get("remove.php");
         });
-        window.addEventListener("beforeunload", function (e) {
-            $.get("remove.php");
-        });
+
     </script>
 
 </body>
