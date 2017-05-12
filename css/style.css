@@ -1,4 +1,4 @@
-body{
+body {
     overflow: hidden;
     margin: 0;
     background-color: black;
@@ -13,7 +13,6 @@ body{
     background: -moz-linear-gradient(red, black);
     transform: rotate(90deg);
     transform-origin: center top;
-    
 }
 
 #viz {
@@ -77,9 +76,7 @@ body{
     height: 60px;
 }
 
-.volume {
-    
-}
+.volume {}
 
 .lowvol {
     font-size: 1.3em;
@@ -89,33 +86,37 @@ body{
     font-size: 1.3em;
 }
 
+
 /* Making sure everything lines up in the middle */
-.volumeSlider > * {
+
+.volumeSlider>* {
     vertical-align: middle;
 }
 
 .seekSlider {
     color: white;
     margin-top: -10px;
-
 }
+
 .seekbox {
     display: inline-block;
     width: auto;
     height: 25px;
-    
 }
+
 .bef {
     margin-right: 10px;
 }
+
 .aft {
     margin-left: 10px;
 }
+
 .seek {
     width: 500px !important;
 }
 
-.seekSlider > * {
+.seekSlider>* {
     vertical-align: middle;
 }
 
@@ -128,7 +129,6 @@ body{
     font-size: 2em;
     margin-left: 97%;
     margin-top: -50px;
-    
 }
 
 .modal-content {
@@ -142,8 +142,8 @@ body{
     border: 0;
 }
 
-.modal-header i{
-    color: rgba(255,255,255,1) !important;
+.modal-header i {
+    color: rgba(255, 255, 255, 1) !important;
 }
 
 .modal-header i:hover {
@@ -175,15 +175,23 @@ body{
     background: none;
     padding: 12px 22px;
 }
+
 .btn-danger.outline {
     border: 2px solid #ff0000;
     color: #ff0000;
 }
-.btn-danger.outline:hover, .btn-danger.outline:focus, .btn-danger.outline:active, .btn-danger.outline.active, .open > .dropdown-toggle.btn-danger {
+
+.btn-danger.outline:hover,
+.btn-danger.outline:focus,
+.btn-danger.outline:active,
+.btn-danger.outline.active,
+.open>.dropdown-toggle.btn-danger {
     color: #ff7a7a;
     border-color: #ff7a7a;
 }
-.btn-danger.outline:active, .btn-danger.outline.active {
+
+.btn-danger.outline:active,
+.btn-danger.outline.active {
     border-color: #932020;
     color: #000;
     box-shadow: none;
@@ -194,9 +202,17 @@ body{
 }
 
 .ui-slider-range {
-   background: green;
+    background: green;
 }
- 
+
+.def {
+    font-size: 1.3em;
+}
+
+.defaultSongs {
+    padding-right: 35px;
+}
+
 /*
 .degreeSlider {
     color: white;
@@ -208,7 +224,3 @@ body{
     width: 10px;
 }
 */
-
-
-
-
