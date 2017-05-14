@@ -1,5 +1,5 @@
 body {
-    overflow: hidden;
+/*    overflow: hidden;*/
     margin: 0;
     background-color: black;
     color: white;
@@ -213,6 +213,17 @@ body {
     padding-right: 35px;
 }
 
+.modal-header {
+    border-bottom: none;
+}
+
+.inner {
+    visibility: hidden;
+}
+
+.defaultSongPlay i{
+    font-size: 2em;
+}
 /*
 .degreeSlider {
     color: white;

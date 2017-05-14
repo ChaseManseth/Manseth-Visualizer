@@ -122,19 +122,27 @@ function update() {
         smooth.push(Math.floor(low[i+1]));
     }
     
+    
+    // Power
+//    for(var i = 0; i < smooth.length; i++) {
+//        smooth[i] = Math.pow(smooth[i], 3);
+//    }
+//    
     // Translate modified array
     var a = 0;
     
     // First half going clockwise
     for(var i = 0; i < smooth.length; i++) {
         var width = smooth[i]; 
+//        width = width / 50000;
         $bars[a].css('height', width);
         a++;
     }
     
     // Second half going counter-clockwise
     for(var i = smooth.length - 1; i > 0; i--) {
-        var width = smooth[i];        
+        var width = smooth[i]; 
+//        width = width / 50000;
         $bars[a].css('height', width);
         a++;
     }
@@ -306,12 +314,20 @@ function pickSong() {
 }
 
 // Get information i.e Artist and title rn
-function getInfo() {
-    var title = titleList[curIndex];
-    var artist = artistList[curIndex];
-    
-    $('.title').html(title);
-    $('.artist').html(artist);
+function getInfo(index) {
+    if(index == null) {
+        var title = titleList[curIndex];
+        var artist = artistList[curIndex];
+
+        $('.title').html(title);
+        $('.artist').html(artist);
+    } else {
+        var title = titleList[index];
+        var artist = artistList[index];
+
+        $('.title').html(title);
+        $('.artist').html(artist);
+    }
 }
 
 
@@ -366,50 +382,6 @@ $(document).ready(function() {
 });
 
 
-// Event listener for space keypress to play and pause
-$(document).keypress(function(e) {
-  if(e.which == 32) {
-    toggleState();
-  }
-});
-
-// Toggle played and paused states
-var play = $("#play");
-play.click(function() {
-    toggleState();
-});
-
-// Show the settings modal
-var setting = $('.settings');
-setting.on("click", function() {
-    $('#set').modal('show')
-});
-
-// Play the next song
-var next = $("#next");
-next.on("click", function(){
-    toggleState();
-    
-    nextSong();
-    
-    toggleState();
-});
-
-// Play previous song or restart current song. Depends on the time value
-var previous = $("#prev");
-previous.on("click", function() {
-    toggleState();
-    
-    prevSong();
-    
-    toggleState();
-});
-
-// Show the upload song modal
-var upl = $('#upload');
-upl.on("click", function() {
-    $('#uploadSong').modal('show');
-});
 
 
 

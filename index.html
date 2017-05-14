@@ -43,7 +43,7 @@
     <div class="upload">
         <div id="upload" class="btn btn-danger outline">Upload music</div>
     </div>
-    
+
 
     <!--        Settings -->
     <div class="settings">
@@ -83,7 +83,7 @@
                 <!-- Volume Slider -->
                 <div class="volumeSlider text-center">
                     <div class="volBox">
-                        <div class="def">
+                        <div class="def" id="defaultSongs">
                             <i class="fa fa-bars defaultSongs" aria-hidden="true"></i>
                         </div>
                     </div>
@@ -167,7 +167,24 @@
                                 <!-- End Degree Warning -->
                             </div>
                             <div class="col-md-3">
-
+                                <!--  Change Gradient -->
+                                <div class="degreeSlider">
+                                    <label for="gradient">
+                                    Change Gradient Colors: 
+                                    <a href="#" data-toggle="tooltip" data-placement="right" title="First color is the one closest to the circle."><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                </label>
+                                    <div class="gradient">
+                                          <div class="form-group">
+                                            <label for="firstColor">First Color</label>
+                                            <input type="text" class="form-control" id="firstColor" value="red">
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="secondColor">Second Color</label>
+                                            <input type="text" class="form-control" id="secondColor" value="black">
+                                          </div>
+                                    </div>
+                                </div>
+                                <!-- End Change Gradient -->
                             </div>
                         </div>
                     </div>
@@ -200,6 +217,27 @@
         </div>
     </div>
 
+    <!--    Default Songs Modal -->
+    <div id="defaultSong" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    <h4 class="modal-title text-center">Default Songs</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table defaultS">
+                        <tr>
+                            <th>Play</th>
+                            <th>Title</th>
+                            <th>Artist</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
@@ -208,6 +246,7 @@
 
     <script src="js/songs.js"></script>
     <script src="js/audio.js"></script>
+    <script src="js/controls.js"></script>
     <script src="https://use.fontawesome.com/16c0e3de83.js"></script>
 
     <script type="text/javascript">
@@ -217,14 +256,14 @@
             complete: function(file) {
                 toggleState();
                 aud.src = "uploads/" + file.name;
-                
+
                 var uploadName = file.name;
                 var uploadTitle = uploadName.split(" - ");
                 console.log(uploadTitle);
-                if(uploadTitle.length < 2) {
+                if (uploadTitle.length < 2) {
                     $('.title').html(file.name);
                     $('.artist').html("Uploaded audio file");
-                } else if(uploadTitle.length > 2) {
+                } else if (uploadTitle.length > 2) {
                     $('.title').html(file.name);
                     $('.artist').html("Uploaded audio file");
                 } else {
@@ -232,7 +271,7 @@
                     $('.title').html(removeExt);
                     $('.artist').html(uploadTitle[0]);
                 }
-                
+
                 setTimeout(
                     function() {
                         toggleState();
