@@ -164,9 +164,7 @@ function init() {
 }
 
 // Start the song is paused and vice versa
-var reload;
-var seek;
-var end;
+var reload, seek, end, gradient;
 function start(x) {
     if(x) {
         aud.play();
@@ -178,14 +176,23 @@ function start(x) {
         
         // Checks if the song has ended
         end = setInterval(function() {ended()}, 1000);
+        
+        // Checks the gradient color
+        gradient = setInterval(function() {
+            var f = $('#firstColor').val();
+            var s = $('#secondColor').val();
+            grade(f, s);
+        }, 300);
     } else {
         aud.pause();
         clearInterval(reload);
         clearInterval(seek);
         clearInterval(end);
+        clearInterval(gradient);
         reload = null;
         seek = null;
         end = null;
+        gradient = null;
     }
 }
 
