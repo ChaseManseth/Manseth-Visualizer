@@ -8,8 +8,8 @@
 
     <link rel="stylesheet" href="css/dropzone.css">
     <script src="js/dropzone.js"></script>
+    <link rel='stylesheet' href='css/jquery-ui.css'>
     <link rel="stylesheet" href="css/style.css">
-    <link rel='stylesheet prefetch' href='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
 
     <!--        <link rel="stylesheet" href="css/input.css">-->
     <meta name="google-site-verification" content="e0pr5rbrwdkt0iIZu92S2DPb3lCVXY01wFjypyhb-yo" />
@@ -58,6 +58,12 @@
             <div class="col-md-6">
                 <!-- Controls -->
                 <div class="text-center">
+                    <!-- Repeat button -->
+                    <div class="box">
+                        <div id="repeat" class="repeat">
+                            <i class="fa fa-repeat" aria-hidden="true"></i>
+                        </div>
+                    </div>
                     <!-- Prev button -->
                     <div class="box">
                         <div id="prev" class="prev">
@@ -76,7 +82,12 @@
                             <i class="fa fa-step-forward" aria-hidden="true"></i>
                         </div>
                     </div>
-
+                    <!-- Shuffle button -->
+                    <div class="box">
+                        <div id="shuffle" class="shuffle">
+                            <i class="fa fa-random" aria-hidden="true"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-3">
@@ -107,14 +118,14 @@
         <div class="row">
             <div class="col-md-offset-3 col-md-6">
                 <!-- Seek Slider -->
-                <div class="seekSlider text-center">
-                    <div class="seekbox">
+                <div class="row seekbar">
+                    <div class="col-md-1">
                         <p id="bef" class="bef">0:00</p>
                     </div>
-                    <div class="seekbox">
-                        <input id="seek" class="seek" type="range" min="0" value="0">
+                    <div class="col-md-10">
+                        <div class="seek"></div>
                     </div>
-                    <div class="seekbox">
+                    <div class="col-md-1">
                         <p id="aft" class="aft">0:00</p>
                     </div>
                 </div>
@@ -242,7 +253,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <script src="js/jquery-ui.js"></script>
 
     <script src="js/songs.js"></script>
     <script src="js/audio.js"></script>

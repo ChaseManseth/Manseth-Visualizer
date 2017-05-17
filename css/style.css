@@ -1,5 +1,5 @@
 body {
-/*    overflow: hidden;*/
+    overflow: hidden;
     margin: 0;
     background-color: black;
     color: white;
@@ -27,7 +27,7 @@ body {
     bottom: 0;
     height: 100px;
     width: 100%;
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.15);
     z-index: 9999;
 }
 
@@ -40,28 +40,29 @@ body {
     color: rgb(175, 175, 175);
 }
 
+.test {
+    font-size: 3em;
+}
+
 .play:hover {
-    transform: scale(1.1, 1.1);
+    transform: scale(1.2, 1.2);
     color: rgb(255, 255, 255);
 }
 
-.next {
+.next, .shuffle {
     transform: scale(0.5);
     margin-left: 30px;
 }
 
-.next:hover {
-    color: rgb(255, 255, 255);
-}
-
-.prev {
+.prev, .repeat {
     transform: scale(0.5);
     margin-right: 30px;
 }
 
-.prev:hover {
+.next:hover, .shuffle:hover, .prev:hover, .repeat:hover {
     color: rgb(255, 255, 255);
 }
+
 
 .volumeSlider {
     margin-top: 20px;
@@ -93,32 +94,20 @@ body {
     vertical-align: middle;
 }
 
-.seekSlider {
-    color: white;
-    margin-top: -10px;
-}
-
-.seekbox {
-    display: inline-block;
-    width: auto;
-    height: 25px;
-}
-
 .bef {
-    margin-right: 10px;
+    text-align: right;
+    margin-top: -7px;
 }
 
 .aft {
-    margin-left: 10px;
+    text-align: left;
+    margin-top: -7px;
 }
 
 .seek {
-    width: 500px !important;
+    width: 100% !important;
 }
 
-.seekSlider>* {
-    vertical-align: middle;
-}
 
 .settings {
     position: absolute;
@@ -201,10 +190,6 @@ body {
     color: black !important;
 }
 
-.ui-slider-range {
-    background: green;
-}
-
 .def {
     font-size: 1.3em;
 }
@@ -221,17 +206,53 @@ body {
     visibility: hidden;
 }
 
-.defaultSongPlay i{
+.defaultSongPlay i {
     font-size: 2em;
 }
-/*
-.degreeSlider {
-    color: white;
-    position: absolute;
-    float: left;
+
+.ui-slider {
+    background: rgba(0,0,0, .5);
 }
 
-.degreeVal { 
-    width: 10px;
+.seekbar:hover .ui-slider-range {
+    background: red;
 }
-*/
+
+.ui-slider:active .ui-slider-range {
+    background: red;
+}
+
+.seekbar:hover .ui-slider-handle {
+    visibility: visible;
+}
+
+.ui-slider:active .ui-slider-handle {
+    visibility: visible;
+    background: white;
+    border: none;
+}
+
+.ui-slider-range {
+    background: rgba(255,255,255, .95);
+}
+
+.ui-slider-horizontal {
+    height: .4em;
+}
+
+.ui-slider .ui-slider-handle {
+    cursor: default;
+    height: 1.1em;
+    position: absolute;
+    width: 1.1em;
+    z-index: 2;
+    visibility: hidden;
+    border-radius: 100%;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+    top: -0.4em;
+    margin-left: -0.5em;
+}
+
+

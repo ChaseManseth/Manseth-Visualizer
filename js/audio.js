@@ -1,6 +1,8 @@
 // Create audio context
 var AUDIO = new AudioContext();
-if (!AUDIO) {console.error('Web Audio API not supported :(');}
+if (!AUDIO) {
+    console.error('Web Audio API not supported :(');
+}
 
 // Create and configure analyser node and storage buffer
 var analyser = AUDIO.createAnalyser();
@@ -16,17 +18,17 @@ var viz = document.getElementById('viz'),
 // Creates many boxes 
 function createBars(numBars) {
     var barCollection = [];
-    
+
     console.log('numBars', numBars);
-    
+
     for (var i = 0; i <= numBars; i++) {
         var a = document.createElement('div');
         a.classList.add('bar');
-        
+
         viz.appendChild(a);
-        barCollection.push($(a));      
+        barCollection.push($(a));
     }
-    
+
     return barCollection;
 }
 
@@ -40,44 +42,45 @@ var n = 3;
 // Verify degree
 // Ask a question once for higher degrees
 var ans = false;
+
 function degreeSet(x) {
-    if(x > 5) {
-        if(!ans) {
+    if (x > 5) {
+        if (!ans) {
             toggleState(); // Pause
             $('#degreeWarning').show();
-            
+
             // User answers yes
-            $("#degYes").on("click", function() {
+            $("#degYes").on("click", function () {
                 ans = true;
                 $('#degreeWarning').hide();
                 degreeSet(x);
             });
-            
+
             // Users answers no
-            $("#degNo").on("click", function() {
+            $("#degNo").on("click", function () {
                 ans = false;
                 $('#degreeWarning').hide();
                 degreeSet(3);
-                
+
                 // Set the input bar back to three
                 $('#degree').val(3);
                 $(".degval").html("Current Value: " + $('#degree').val());
             });
-            
+
             toggleState(); // Play
         } else {
             // Removes all elements
-            document.getElementById("viz").innerHTML='';
+            document.getElementById("viz").innerHTML = '';
             // Sets the seg array to 0 and creates them again with the proper amount of segs
             $bars = 0;
             $bars = createBars((((bufferLength - snip) - 1) * 2) * x);
             // Restyle it because we have more or less segs now and must adjust
             style();
             n = x;
-        } 
+        }
     } else {
-         // Removes all elements
-        document.getElementById("viz").innerHTML='';
+        // Removes all elements
+        document.getElementById("viz").innerHTML = '';
         // Sets the seg array to 0 and creates them again with the proper amount of segs
         $bars = 0;
         $bars = createBars((((bufferLength - snip) - 1) * 2) * x);
@@ -91,58 +94,58 @@ function degreeSet(x) {
 // Main render and update method
 function update() {
     analyser.getByteFrequencyData(dataArray);
-    
+
     // Copy the dataArray without high frequencies
     var low = [];
     var len = (bufferLength - snip);
-    
-    for(var i = 0; i <= len; i++) {
+
+    for (var i = 0; i <= len; i++) {
         low.push(dataArray[i]);
     }
-    
+
     // Use Scott's parabolic approximation function
     var smooth = [];
     smooth.push(Math.floor(low[0]));
-    
-    for(var i = 1; i < low.length - 1; i += 2) {
-        
+
+    for (var i = 1; i < low.length - 1; i += 2) {
+
         var c = low[i];
-        var a = (low[i+1] + low[i-1] - 2*low[i]) / 2.0;
-        var b = (low[i+1] - low[i-1]) / 2.0;
-        
-        for(var j = 1; j < n; j++) {
-            smooth.push(Math.floor(a * (1.0/n) * (1.0/n) * j + b * (1.0/n) * (-1) * j + c));
+        var a = (low[i + 1] + low[i - 1] - 2 * low[i]) / 2.0;
+        var b = (low[i + 1] - low[i - 1]) / 2.0;
+
+        for (var j = 1; j < n; j++) {
+            smooth.push(Math.floor(a * (1.0 / n) * (1.0 / n) * j + b * (1.0 / n) * (-1) * j + c));
         }
-        
+
         smooth.push(Math.floor(low[i]));
-        for(var j = 1; j < n; j++) {
-            smooth.push(Math.floor(a * (1.0/n) * (1.0/n) * j + b * (1.0/n) * j + c));
+        for (var j = 1; j < n; j++) {
+            smooth.push(Math.floor(a * (1.0 / n) * (1.0 / n) * j + b * (1.0 / n) * j + c));
         }
-        
-        smooth.push(Math.floor(low[i+1]));
+
+        smooth.push(Math.floor(low[i + 1]));
     }
-    
-    
+
+
     // Power
-//    for(var i = 0; i < smooth.length; i++) {
-//        smooth[i] = Math.pow(smooth[i], 3);
-//    }
-//    
+    //    for(var i = 0; i < smooth.length; i++) {
+    //        smooth[i] = Math.pow(smooth[i], 3);
+    //    }
+    //    
     // Translate modified array
     var a = 0;
-    
+
     // First half going clockwise
-    for(var i = 0; i < smooth.length; i++) {
-        var width = smooth[i]; 
-//        width = width / 50000;
+    for (var i = 0; i < smooth.length; i++) {
+        var width = smooth[i];
+        //        width = width / 50000;
         $bars[a].css('height', width);
         a++;
     }
-    
+
     // Second half going counter-clockwise
-    for(var i = smooth.length - 1; i > 0; i--) {
-        var width = smooth[i]; 
-//        width = width / 50000;
+    for (var i = smooth.length - 1; i > 0; i--) {
+        var width = smooth[i];
+        //        width = width / 50000;
         $bars[a].css('height', width);
         a++;
     }
@@ -157,28 +160,35 @@ function init() {
     var source = AUDIO.createMediaElementSource(aud);
     source.connect(analyser);
     analyser.connect(AUDIO.destination);
-    
-    $bars = createBars((((bufferLength - snip) - 1) * 2) * n);  
+
+    $bars = createBars((((bufferLength - snip) - 1) * 2) * n);
     style();
     start(true);
 }
 
 // Start the song is paused and vice versa
 var reload, seek, end, gradient;
+
 function start(x) {
-    if(x) {
+    if (x) {
         aud.play();
         // Plays the song
-        reload = setInterval(function() {update()}, 10);
-        
+        reload = setInterval(function () {
+            update()
+        }, 10);
+
         // Updates the seek bar
-        seek = setInterval(function() {seekBar()}, 500);
-        
+        seek = setInterval(function () {
+            seekBar()
+        }, 500);
+
         // Checks if the song has ended
-        end = setInterval(function() {ended()}, 1000);
-        
+        end = setInterval(function () {
+            ended()
+        }, 1000);
+
         // Checks the gradient color
-        gradient = setInterval(function() {
+        gradient = setInterval(function () {
             var f = $('#firstColor').val();
             var s = $('#secondColor').val();
             grade(f, s);
@@ -201,8 +211,8 @@ function style() {
     var step = Math.PI * 2 / $bars.length;
     var radius = 160;
     var angle = 0;
-    
-    for(var i = 0; i < $bars.length; i++) {
+
+    for (var i = 0; i < $bars.length; i++) {
         var $elem = $bars[i];
         // Maths
         var x = Math.round(radius * Math.cos(angle));
@@ -210,7 +220,7 @@ function style() {
         $elem.css('left', x + 'px');
         $elem.css('top', y + 'px');
         var rot = -90 + ((360 / $bars.length) * i);
-        $elem.css('transform', 'rotate(' + rot + 'deg)'); 
+        $elem.css('transform', 'rotate(' + rot + 'deg)');
         angle += step;
 
     }
@@ -219,7 +229,7 @@ function style() {
 // Toggle the music from playing to paused or vice versa
 // It also toggles the state or class of the play button
 function toggleState() {
-    if(aud.paused) {
+    if (aud.paused) {
         start(true);
         $('#stateicon').removeClass('fa fa-play-circle-o');
         $('#stateicon').addClass('fa fa-pause-circle-o');
@@ -231,21 +241,19 @@ function toggleState() {
 }
 
 // Update the seekBar information such as time and position of the slider
+var seekTrue = true; 
 function seekBar() {
-    var seek = $('#seek');
-    var bef = $('#bef');
-    var aft = $('#aft');
-    
-    seek.attr("max", Math.floor(aud.duration));            
-    var beforeSec = Math.floor(aud.currentTime);
-    var afterSec = Math.floor(aud.duration);
-    
-    var min = Math.floor(beforeSec / 60);
-    var sec = beforeSec - (60 * min);
+    if(seekTrue) {
+        var bef = $('#bef');
+        var aft = $('#aft');
 
-    seek.val(beforeSec);
-    bef.html(formatTime(beforeSec));
-    aft.html(formatTime(afterSec));
+        var beforeSec = Math.floor(aud.currentTime);
+        var afterSec = Math.floor(aud.duration) - beforeSec;
+
+        seekbar.slider( "option", "value",  beforeSec);
+        bef.html(formatTime(beforeSec));
+        aft.html("-" + formatTime(afterSec));
+    }
 }
 
 // Formats time
@@ -258,7 +266,7 @@ function formatTime(seconds) {
 
 // Checks if the song has ended and if so it plays the next song
 function ended() {
-    if(aud.ended) {
+    if (aud.ended) {
         nextSong();
         start(true);
     }
@@ -269,12 +277,12 @@ function currentSong() {
     var src = aud.src;
     var index = -1;
     // Get the current index of the song playing
-    for(var i = 0; i < srcList.length; i++) {
-        if(src === srcList[i]) {
+    for (var i = 0; i < srcList.length; i++) {
+        if (src === srcList[i]) {
             index = i;
-        } 
+        }
     }
-    
+
     return index;
 }
 
@@ -282,31 +290,31 @@ function currentSong() {
 var curIndex = currentSong();
 // Increment it by one if out of bounds set to 0
 function nextSong() {
-    if(curIndex + 1 == srcList.length) {
+    if (curIndex + 1 == srcList.length) {
         curIndex = 0;
     } else {
         ++curIndex;
     }
-    
-//    console.log(srcList[curIndex]);
+
     aud.src = srcList[curIndex];
     getInfo();
+    newSong();
 }
 
 // Play the previous song
 function prevSong() {
-    if(aud.currentTime > 5 ) {
+    if (aud.currentTime > 5) {
         aud.currentTime = 0;
     } else {
-        if(curIndex - 1 < 0) {
+        if (curIndex - 1 < 0) {
             curIndex = srcList.length - 1;
         } else {
             --curIndex;
         }
-        
-//        console.log(srcList[curIndex]);
+
         aud.src = srcList[curIndex];
         getInfo();
+        newSong();
     }
 }
 
@@ -314,15 +322,15 @@ function prevSong() {
 function pickSong() {
     var rand = Math.floor(Math.random() * srcList.length);
     curIndex = rand;
-    
-//    console.log(srcList[curIndex]);
+
     aud.src = srcList[curIndex];
     getInfo();
+    newSong();
 }
 
 // Get information i.e Artist and title rn
 function getInfo(index) {
-    if(index == null) {
+    if (index == null) {
         var title = titleList[curIndex];
         var artist = artistList[curIndex];
 
@@ -341,73 +349,12 @@ function getInfo(index) {
 
 
 
-// Event listeners and other functions to perform when the page loads
+
 
 // When the page loads initiate the program
-$(document).ready(function() {
+$(document).ready(function () {
     init();
-    
-    
-    // Bootstrap tooltip
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    });
-    
-    // Degree Slider
-        // Get the silder and the input to store values
-        var degSlider = $('#degree');
-        var degVal = $('.degval');
-        degVal.html("Current Value: " + degSlider.val());
-        // When ever the silder is used change value in the input and run function to reload
-        degSlider.on("change", function() {
-            degVal.html("Current Value: " + degSlider.val());
-            degreeSet(degSlider.val());
-        });
-    
-    // Volume Slider
-        var volSlider = $('#volume');
-        var volVal = $('#volumeVal');
-        volVal.val(volSlider.val());
-        // When ever the silder is used change value in the input and run function to reload
-        volSlider.on("input", function() {
-            volVal.val(volSlider.val());
-            var vol = volSlider.val() / 100;
-            aud.volume = vol;
-        });    
-    
-    // Event listeners for the seekbar
-        var seeks = $('#seek');
-        // When the thumb is dropped
-        seeks.on("change", function() {
-            var seekval = seeks.val();
-            aud.currentTime = parseInt(seekval, 10);
-            seekBar();
-        });
-
-        // Hide all alerts
-        $('#degreeWarning').hide();
 });
 
 
 
-
-
-// Seekbar code 
-//var $projectBar = $(this).find('.barsl');
-//    var $projectPercent = $(this).find('.percent');
-//    var $projectRange = $(this).find('.ui-slider-range');
-//    $projectBar.slider({
-//      range: "min",
-//      animate: true,
-//      value: 0,
-//      min: 0,
-//      max: 100,
-//      step: 1,
-//      change: function(event, ui) {
-//        var $projectRange = $(this).find('.ui-slider-range');
-//        var percent = ui.value;
-//        $projectRange.css({
-//            'background': '#f20000'
-//          }); 
-//      }
-//    });
