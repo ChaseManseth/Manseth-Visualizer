@@ -40,68 +40,88 @@ body {
     color: rgb(175, 175, 175);
 }
 
-.test {
-    font-size: 3em;
-}
-
 .play:hover {
     transform: scale(1.2, 1.2);
     color: rgb(255, 255, 255);
 }
 
-.next, .shuffle {
+.next,
+.shuffle {
     transform: scale(0.5);
     margin-left: 30px;
 }
 
-.prev, .repeat {
+.prev,
+.repeat {
     transform: scale(0.5);
     margin-right: 30px;
 }
 
-.next:hover, .shuffle:hover, .prev:hover, .repeat:hover {
+.next:hover,
+.shuffle:hover,
+.prev:hover,
+.repeat:hover {
     color: rgb(255, 255, 255);
 }
 
 
-.volumeSlider {
-    margin-top: 20px;
-    width: 50%;
-    color: white;
-    margin-left: 20%;
+/* Volume Styles */
+
+.volbutton:hover .ui-slider-range {
+    background: red;
 }
 
-.volBox {
-    display: inline-block;
-    width: auto;
-    height: 60px;
+.volbutton:hover .ui-slider-handle {
+    visibility: visible;
 }
 
-.volume {}
+.volume {
+    margin-top: 10px;
+}
+
+.vol {
+    margin-top: 8px;
+    width: 100%;
+}
 
 .lowvol {
     font-size: 1.3em;
+    margin-left: 20px;
 }
 
 .highvol {
     font-size: 1.3em;
+    margin-left: -20px;
+}
+
+.def {
+    font-size: 1.3em;
 }
 
 
-/* Making sure everything lines up in the middle */
+/* Seekbar Styles */
 
-.volumeSlider>* {
-    vertical-align: middle;
+.seekbar {
+/*    margin-top: 10px;*/
+    padding-top: 15px;
+}
+
+.seekbar:hover .ui-slider-range {
+    background: red;
+}
+
+.seekbar:hover .ui-slider-handle {
+    visibility: visible;
 }
 
 .bef {
     text-align: right;
-    margin-top: -7px;
+    margin-top: -6px;
 }
 
 .aft {
     text-align: left;
-    margin-top: -7px;
+    margin-top: -6px;
 }
 
 .seek {
@@ -109,16 +129,17 @@ body {
 }
 
 
+/* Setting Styles */
+
 .settings {
-    position: absolute;
     color: rgba(255, 255, 255, 0.7);
-    width: 50px;
-    height: 50px;
-    text-align: center;
     font-size: 2em;
-    margin-left: 97%;
-    margin-top: -50px;
+    float: right;
+    margin-right: 10px;
 }
+
+
+/* Modal Styles */
 
 .modal-content {
     background-color: rgba(0, 0, 0, 0.2);
@@ -146,6 +167,9 @@ body {
 .modal-backdrop {
     background-color: rgba(0, 0, 0, 0);
 }
+
+
+/* Tooltip Styles */
 
 .tooltip-inner {
     background-color: white;
@@ -190,14 +214,6 @@ body {
     color: black !important;
 }
 
-.def {
-    font-size: 1.3em;
-}
-
-.defaultSongs {
-    padding-right: 35px;
-}
-
 .modal-header {
     border-bottom: none;
 }
@@ -210,20 +226,15 @@ body {
     font-size: 2em;
 }
 
-.ui-slider {
-    background: rgba(0,0,0, .5);
-}
 
-.seekbar:hover .ui-slider-range {
-    background: red;
+/* Slider Styles */
+
+.ui-slider {
+    background: rgba(0, 0, 0, .5);
 }
 
 .ui-slider:active .ui-slider-range {
     background: red;
-}
-
-.seekbar:hover .ui-slider-handle {
-    visibility: visible;
 }
 
 .ui-slider:active .ui-slider-handle {
@@ -233,7 +244,7 @@ body {
 }
 
 .ui-slider-range {
-    background: rgba(255,255,255, .95);
+    background: rgba(255, 255, 255, .95);
 }
 
 .ui-slider-horizontal {
@@ -255,4 +266,6 @@ body {
     margin-left: -0.5em;
 }
 
-
+.controlActive {
+    color: rgba(255,255,255,1);
+}

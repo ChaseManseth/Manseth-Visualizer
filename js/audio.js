@@ -127,9 +127,9 @@ function update() {
 
 
     // Power
-    //    for(var i = 0; i < smooth.length; i++) {
-    //        smooth[i] = Math.pow(smooth[i], 3);
-    //    }
+//        for(var i = 0; i < smooth.length; i++) {
+//            smooth[i] = Math.pow(smooth[i], 2);
+//        }
     //    
     // Translate modified array
     var a = 0;
@@ -137,7 +137,7 @@ function update() {
     // First half going clockwise
     for (var i = 0; i < smooth.length; i++) {
         var width = smooth[i];
-        //        width = width / 50000;
+//                width = width / 200;
         $bars[a].css('height', width);
         a++;
     }
@@ -145,7 +145,7 @@ function update() {
     // Second half going counter-clockwise
     for (var i = smooth.length - 1; i > 0; i--) {
         var width = smooth[i];
-        //        width = width / 50000;
+//                width = width / 200;
         $bars[a].css('height', width);
         a++;
     }
@@ -265,10 +265,25 @@ function formatTime(seconds) {
 }
 
 // Checks if the song has ended and if so it plays the next song
+var shuffle = false;
+var re = false;
+
 function ended() {
     if (aud.ended) {
-        nextSong();
-        start(true);
+        // Shuffle and repeat items if a song has ended
+        if(re && shuffle) {
+            repeat();
+            start(true);
+        } else if(shuffle) {
+            pickSong();
+            start(true);
+        } else if(re) {
+            repeat();
+            start(true);
+        } else {
+            nextSong();
+            start(true);
+        }
     }
 }
 
@@ -295,8 +310,14 @@ function nextSong() {
     } else {
         ++curIndex;
     }
-
-    aud.src = srcList[curIndex];
+    
+    // If shuffle is on
+    if(shuffle) {
+        pickSong();
+    } else {
+        aud.src = srcList[curIndex];
+    }
+    
     getInfo();
     newSong();
 }
@@ -311,8 +332,14 @@ function prevSong() {
         } else {
             --curIndex;
         }
+        
+        // If shuffle is on
+        if(shuffle) {
+            pickSong();
+        } else {
+            aud.src = srcList[curIndex];
+        }
 
-        aud.src = srcList[curIndex];
         getInfo();
         newSong();
     }
@@ -323,6 +350,13 @@ function pickSong() {
     var rand = Math.floor(Math.random() * srcList.length);
     curIndex = rand;
 
+    aud.src = srcList[curIndex];
+    getInfo();
+    newSong();
+}
+
+// Repeat a song
+function repeat() {
     aud.src = srcList[curIndex];
     getInfo();
     newSong();

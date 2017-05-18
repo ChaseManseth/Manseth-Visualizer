@@ -30,7 +30,6 @@
 
         ga('create', 'UA-98201458-1', 'auto');
         ga('send', 'pageview');
-
     </script>
 
 
@@ -39,16 +38,24 @@
 <body>
     <audio id="audio"></audio>
 
-    <!-- Add an upload function -->
-    <div class="upload">
-        <div id="upload" class="btn btn-danger outline">Upload music</div>
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Upload -->
+            <div class="upload">
+                <div id="upload" class="btn btn-danger outline">Upload music</div>
+            </div>
+        </div>
+        <div class="col-md-offset-8 col-md-1">
+            <!-- Settings -->
+            <div class="settings">
+                <i class="fa fa-cog" aria-hidden="true"></i>
+            </div>
+        </div>
     </div>
 
 
-    <!--        Settings -->
-    <div class="settings">
-        <i class="fa fa-cog" aria-hidden="true"></i>
-    </div>
+
+
     <div class="footer container-fluid">
         <div class="row">
             <div class="col-md-3 info">
@@ -92,21 +99,21 @@
             </div>
             <div class="col-md-3">
                 <!-- Volume Slider -->
-                <div class="volumeSlider text-center">
-                    <div class="volBox">
+                <div class="row volume">
+                    <div class="col-md-1 col-md-offset-3">
                         <div class="def" id="defaultSongs">
                             <i class="fa fa-bars defaultSongs" aria-hidden="true"></i>
                         </div>
                     </div>
-                    <div class="volBox">
+                    <div class="col-md-1 volbutton">
                         <div class="lowvol">
                             <i class="fa fa-volume-down" aria-hidden="true"></i>
                         </div>
                     </div>
-                    <div class="volBox">
-                        <input id="volume" class="volume" type="range" max="100" min="0" value="100">
+                    <div class="col-md-4 volbutton">
+                        <div class="vol"></div>
                     </div>
-                    <div class="volBox">
+                    <div class="col-md-1 volbutton">
                         <div class="highvol">
                             <i class="fa fa-volume-up" aria-hidden="true"></i>
                         </div>
@@ -115,6 +122,7 @@
             </div>
         </div>
 
+        <!-- Seek Bar Slider -->
         <div class="row">
             <div class="col-md-offset-3 col-md-6">
                 <!-- Seek Slider -->
@@ -126,7 +134,7 @@
                         <div class="seek"></div>
                     </div>
                     <div class="col-md-1">
-                        <p id="aft" class="aft">0:00</p>
+                        <p id="aft" class="aft">-0:00</p>
                     </div>
                 </div>
             </div>
@@ -185,14 +193,14 @@
                                     <a href="#" data-toggle="tooltip" data-placement="right" title="First color is the one closest to the circle."><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                 </label>
                                     <div class="gradient">
-                                          <div class="form-group">
+                                        <div class="form-group">
                                             <label for="firstColor">First Color</label>
                                             <input type="text" class="form-control" id="firstColor" value="red">
-                                          </div>
-                                          <div class="form-group">
+                                        </div>
+                                        <div class="form-group">
                                             <label for="secondColor">Second Color</label>
                                             <input type="text" class="form-control" id="secondColor" value="black">
-                                          </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- End Change Gradient -->
@@ -267,10 +275,10 @@
             complete: function(file) {
                 toggleState();
                 aud.src = "uploads/" + file.name;
-
+                
+                $('.dz-progress').hide();
                 var uploadName = file.name;
                 var uploadTitle = uploadName.split(" - ");
-                console.log(uploadTitle);
                 if (uploadTitle.length < 2) {
                     $('.title').html(file.name);
                     $('.artist').html("Uploaded audio file");
@@ -299,7 +307,6 @@
         window.addEventListener("beforeunload", function() {
             $.get("remove.php");
         });
-
     </script>
 
 </body>

@@ -102,30 +102,40 @@ degSlider.on("change", function () {
 
 // Volume Slider
 var volSlider = $('#volume');
-// When ever the silder is used change value in the input and run function to reload
-volSlider.on("input", function () {
-    var vol = volSlider.val() / 100;
-    aud.volume = vol;
+var volumeSlider = $('.vol');
+// Create the slider 
+volumeSlider.slider({
+    range: "min",
+    animate: "slow",
+    value: 100,
+    min: 0,
+    max: 100,
+    step: 1
 });
 
+// When ever the silder is used change value in the input and run function to reload
+volumeSlider.on('slide', function(event, ui) {
+    var val = ui.value / 100;
+    aud.volume = val;
+});
 
-// Hide all alerts
-$('#degreeWarning').hide();
-
-// Volume 
 // Mute click listener
 var mute = $('.lowvol');
 mute.on('click', function () {
     aud.volume = 0;
-    volSlider.val(0);
+    volumeSlider.slider("option", "value", 0);
 });
 
 // Full volume click listener
 var full = $('.highvol');
 full.on('click', function () {
     aud.volume = 1;
-    volSlider.val(100);
+    volumeSlider.slider("option", "value", 100);
 });
+
+
+// Hide all alerts
+$('#degreeWarning').hide();
 
 // Seekbar
 // Creates the seekbar when the page loads
@@ -133,8 +143,8 @@ var seekbar = $('.seek');
 seekbar.slider({
     range: "min",
     animate: "slow",
-    value: 1,
-    min: 1,
+    value: 0,
+    min: 0,
     step: 1
 });
 
@@ -142,6 +152,7 @@ seekbar.slider({
 seekbar.on('slide', function (event, ui) {
     var bef = $('#bef');
     var aft = $('#aft');
+    
     var val = ui.value;
     var lastVal = Math.floor(aud.duration) - val;
     bef.html(formatTime(val));
@@ -171,6 +182,34 @@ function newSong() {
     }, 1000);
 }
 
+// Shuffle function
+var toggleShuffle = false;
+var s = $('.shuffle');
+s.on('click', function() {
+   if(toggleShuffle) {
+       toggleShuffle = false;
+       shuffle = false;
+       s.removeClass('controlActive');
+   } else {
+       toggleShuffle = true;
+       shuffle = true;
+       s.addClass('controlActive');
+   }
+});
 
+// Repeat function
+var toggleRepeat = false;
+var r = $('.repeat');
+r.on('click', function() {
+    if(toggleRepeat) {
+        toggleRepeat = false;
+        re = false;
+        r.removeClass('controlActive');
+    } else {
+        toggleRepeat = true;
+        re = true;
+        r.addClass('controlActive');
+    }
+});
 
 
