@@ -101,6 +101,7 @@
                 <!-- Volume Slider -->
                 <div class="row volume">
                     <div class="col-md-1 col-md-offset-3">
+<!--                        Default Songs -->
                         <div class="def" id="defaultSongs">
                             <i class="fa fa-bars defaultSongs" aria-hidden="true"></i>
                         </div>
@@ -256,6 +257,27 @@
             </div>
         </div>
     </div>
+    
+    <!--    Uploaded Songs Modal -->
+    <div id="uploadedSong" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    <h4 class="modal-title text-center">Uploaded Songs</h4>
+                </div>
+                <div class="modal-body">
+                    <center>
+                        Whoops! It looks like you haven't uploaded any songs, click the Upload music button and get going!
+                    </center>
+                    <table class="table">
+                        <tbody class="uploadedS">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
@@ -290,6 +312,10 @@
                     $('.title').html(removeExt);
                     $('.artist').html(uploadTitle[0]);
                 }
+                
+                uploadedSongs.push(file.name);
+                
+                newSong();
 
                 setTimeout(
                     function() {
@@ -299,7 +325,8 @@
                 );
 
                 $('#uploadSong').modal('hide');
-
+                
+                updateUploadedList();
             }
         };
 

@@ -42,7 +42,7 @@ body {
 
 .play:hover {
     transform: scale(1.2, 1.2);
-    color: rgb(255, 255, 255);
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .next,
@@ -61,7 +61,7 @@ body {
 .shuffle:hover,
 .prev:hover,
 .repeat:hover {
-    color: rgb(255, 255, 255);
+    color: rgba(255, 255, 255, 0.85);
 }
 
 
@@ -94,9 +94,11 @@ body {
     margin-left: -20px;
 }
 
-.def {
+.def, .defUp {
     font-size: 1.3em;
 }
+
+
 
 
 /* Seekbar Styles */
@@ -180,6 +182,7 @@ body {
     border-right-color: none;
 }
 
+
 .info {
     color: white !important;
 }
@@ -220,9 +223,15 @@ body {
 
 .inner {
     visibility: hidden;
+    width: 0;
+    height: 0;
 }
 
 .defaultSongPlay i {
+    font-size: 2em;
+}
+
+.uploadedSongPlay i {
     font-size: 2em;
 }
 
@@ -268,4 +277,8 @@ body {
 
 .controlActive {
     color: rgba(255,255,255,1);
+}
+
+.controlActive:hover {
+    color: rgba(255,255,255,1) !important;
 }

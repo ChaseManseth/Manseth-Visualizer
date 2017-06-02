@@ -102,6 +102,11 @@ function update() {
     for (var i = 0; i <= len; i++) {
         low.push(dataArray[i]);
     }
+    
+    // Power
+    for(var i = 0; i < low.length; i++) {
+        low[i] = Math.pow(low[i], 2);
+    }
 
     // Use Scott's parabolic approximation function
     var smooth = [];
@@ -126,18 +131,15 @@ function update() {
     }
 
 
-    // Power
-//        for(var i = 0; i < smooth.length; i++) {
-//            smooth[i] = Math.pow(smooth[i], 2);
-//        }
-    //    
+
+    //  Power 2 use 225
     // Translate modified array
     var a = 0;
 
     // First half going clockwise
     for (var i = 0; i < smooth.length; i++) {
         var width = smooth[i];
-//                width = width / 200;
+                width = width / 225;
         $bars[a].css('height', width);
         a++;
     }
@@ -145,7 +147,7 @@ function update() {
     // Second half going counter-clockwise
     for (var i = smooth.length - 1; i > 0; i--) {
         var width = smooth[i];
-//                width = width / 200;
+                width = width / 225;
         $bars[a].css('height', width);
         a++;
     }

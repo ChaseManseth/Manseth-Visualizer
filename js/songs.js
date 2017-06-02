@@ -47,7 +47,7 @@ for (var prop in defaultSongs) {
     srcList.push(defaultSongs[prop].src);
 
     // Add the songs into the table
-    $('.defaultS').append("<tr><td><div class='defaultSongPlay'><i class='fa fa-play-circle-o' aria-hidden='true'></i><div class='inner'>"+ a +"</div></div></td><td>" + defaultSongs[prop].title + "</td><td>" + defaultSongs[prop].artist + "</td></tr>");
+    $('.defaultS').append("<tr><td><div class='defaultSongPlay'><i class='fa fa-play-circle-o' aria-hidden='true'></i></div></td><td>" + defaultSongs[prop].title + "</td><td>" + defaultSongs[prop].artist + "</td></tr>");
     a++;
 }
 
