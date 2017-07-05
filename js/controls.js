@@ -1,3 +1,4 @@
+
 // Event listener for space keypress to play and pause
 $(document).keypress(function (e) {
     if (e.which == 32) {
@@ -88,6 +89,7 @@ $('#secondColor').on("change", function () {
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
+
 
 // Degree Slider
 // Get the silder and the input to store values

@@ -330,9 +330,12 @@
         };
 
 
+        // When the page is refreshed the uploaded folder will be emptied
         window.addEventListener("beforeunload", function() {
             $.get("remove.php");
         });
+        
+        
     </script>
 
 </body>

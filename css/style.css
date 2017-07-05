@@ -18,7 +18,10 @@ body {
 #viz {
     position: relative;
     transform: rotate(-90deg);
-    margin-top: -30%;
+    margin-top: -350px;
+    border: 1px solid white;
+    width: auto;
+    height: auto;
 }
 
 .footer {
