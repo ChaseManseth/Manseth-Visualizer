@@ -44,6 +44,18 @@ window.addEventListener("beforeunload", function () {
     $.get("remove.php");
 });
 
+
+// Function for positioning the bars
+function getPos() {
+    var width = window.innerWidth;
+    var x;
+
+    console.log(width);
+    x = (-width + 764.45) / 2.101;
+
+    return x;
+}
+
 // Set position of the visualiser on load and resize events
 // On page load
 $(document).ready(function () {

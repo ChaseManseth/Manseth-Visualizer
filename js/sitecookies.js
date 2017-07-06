@@ -23,7 +23,17 @@ function checkCookies() {
     
     // Finally add the gradient
     grade('' + fc + '', '' + sc + '');
-
-
-
 }
+
+// Getters and Setters for onload
+$(document).ready(function() {
+    // Get First Color
+    function getFC() {
+        return Cookies.get('fc');
+    }
+    
+    // Get Second Color
+    function getSC() {
+        return Cookies.get('sc');
+    }
+});

@@ -223,13 +223,4 @@ r.on('click', function () {
 });
 
 
-// Function for positioning the bars
-function getPos() {
-    var width = window.innerWidth;
-    var x;
 
-    console.log(width);
-    x = (-width + 764.45) / 2.101;
-
-    return x;
-}
