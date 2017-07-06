@@ -9,8 +9,10 @@ body {
     position: fixed;
     height: 1px;
     width: 3px;
+/*
     background: -webkit-linear-gradient(red, black);
     background: -moz-linear-gradient(red, black);
+*/
     transform: rotate(90deg);
     transform-origin: center top;
 }

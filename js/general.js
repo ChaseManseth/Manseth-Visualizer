@@ -50,6 +50,8 @@ $(document).ready(function () {
     var a = getPos();
 
     $("#viz").css("margin-top", a + "px");
+    
+    
 });
 
 // On resize

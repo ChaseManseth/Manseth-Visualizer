@@ -169,7 +169,7 @@ function init() {
 }
 
 // Start the song is paused and vice versa
-var reload, seek, end, gradient;
+var reload, seek, end;
 
 function start(x) {
     if (x) {
@@ -189,22 +189,14 @@ function start(x) {
             ended()
         }, 1000);
 
-        // Checks the gradient color
-        gradient = setInterval(function () {
-            var f = $('#firstColor').val();
-            var s = $('#secondColor').val();
-            grade(f, s);
-        }, 300);
     } else {
         aud.pause();
         clearInterval(reload);
         clearInterval(seek);
         clearInterval(end);
-        clearInterval(gradient);
         reload = null;
         seek = null;
         end = null;
-        gradient = null;
     }
 }
 
@@ -388,11 +380,9 @@ function getInfo(index) {
 
 
 // When the page loads initiate the program
-$(document).ready(function () {
+$(document).ready(function() {
     init();
     
-    console.log("Height is: " + window.innerHeight);
-    console.log("Width is: " + window.innerWidth);
 });
 
 

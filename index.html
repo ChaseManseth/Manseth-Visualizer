@@ -8,8 +8,11 @@
 
     <link rel="stylesheet" href="css/dropzone.css">
     <script src="js/dropzone.js"></script>
+    
     <link rel='stylesheet' href='css/jquery-ui.css'>
     <link rel="stylesheet" href="css/style.css">
+    
+    <script src="js/js.cookie.js"></script>
 
     <!--        <link rel="stylesheet" href="css/input.css">-->
     <meta name="google-site-verification" content="e0pr5rbrwdkt0iIZu92S2DPb3lCVXY01wFjypyhb-yo" />
@@ -196,11 +199,11 @@
                                     <div class="gradient">
                                         <div class="form-group">
                                             <label for="firstColor">First Color</label>
-                                            <input type="text" class="form-control" id="firstColor" value="red">
+                                            <input type="text" class="form-control" id="firstColor">
                                         </div>
                                         <div class="form-group">
                                             <label for="secondColor">Second Color</label>
-                                            <input type="text" class="form-control" id="secondColor" value="black">
+                                            <input type="text" class="form-control" id="secondColor">
                                         </div>
                                     </div>
                                 </div>
@@ -280,18 +283,27 @@
     </div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="js/jquery-ui.js"></script>
-
-    <script src="js/songs.js"></script>
-    <script src="js/audio.js"></script>
-    <script src="js/controls.js"></script>
-    <script src="js/general.js"></script>
-    <script src="https://use.fontawesome.com/16c0e3de83.js"></script>
-
-
+    
+    
+    
+    <script type="text/javascript" src="js/songs.js"></script>
+    <script type="text/javascript" src="js/audio.js"></script>
+    <script type="text/javascript" src="js/controls.js"></script>
+    <script type="text/javascript" src="js/general.js"></script>
+    <script type="text/javascript" src="https://use.fontawesome.com/16c0e3de83.js"></script>
+    <script type="text/javascript" src="js/sitecookies.js"></script>
+    
+    <script type="text/javascript">
+        // Try to run it only once
+        $(document).ready(function() {
+            checkCookies();
+        });
+        
+    </script>
+    
 </body>
 
 </html>

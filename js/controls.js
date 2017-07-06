@@ -1,9 +1,9 @@
-
 // Event listener for space keypress to play and pause
 $(document).keypress(function (e) {
     if (e.which == 32) {
         toggleState();
     }
+    
 });
 
 // Toggle played and paused states
@@ -76,12 +76,20 @@ function grade(first, second) {
 $('#firstColor').on("change", function () {
     var f = $('#firstColor').val();
     var s = $('#secondColor').val();
+    Cookies.set('fc', ''+ f +'');
+    Cookies.set('sc', ''+ s +'');
+    
+    console.log(Cookies.get('fc'));
     grade(f, s);
 });
 
 $('#secondColor').on("change", function () {
     var f = $('#firstColor').val();
     var s = $('#secondColor').val();
+    Cookies.set('fc', ''+ f +'');
+    Cookies.set('sc', ''+ s +'');
+    
+    console.log(Cookies.get('fc'));
     grade(f, s);
 });
 
@@ -116,7 +124,7 @@ volumeSlider.slider({
 });
 
 // When ever the silder is used change value in the input and run function to reload
-volumeSlider.on('slide', function(event, ui) {
+volumeSlider.on('slide', function (event, ui) {
     var val = ui.value / 100;
     aud.volume = val;
 });
@@ -154,7 +162,7 @@ seekbar.slider({
 seekbar.on('slide', function (event, ui) {
     var bef = $('#bef');
     var aft = $('#aft');
-    
+
     var val = ui.value;
     var lastVal = Math.floor(aud.duration) - val;
     bef.html(formatTime(val));
@@ -187,23 +195,23 @@ function newSong() {
 // Shuffle function
 var toggleShuffle = false;
 var s = $('.shuffle');
-s.on('click', function() {
-   if(toggleShuffle) {
-       toggleShuffle = false;
-       shuffle = false;
-       s.removeClass('controlActive');
-   } else {
-       toggleShuffle = true;
-       shuffle = true;
-       s.addClass('controlActive');
-   }
+s.on('click', function () {
+    if (toggleShuffle) {
+        toggleShuffle = false;
+        shuffle = false;
+        s.removeClass('controlActive');
+    } else {
+        toggleShuffle = true;
+        shuffle = true;
+        s.addClass('controlActive');
+    }
 });
 
 // Repeat function
 var toggleRepeat = false;
 var r = $('.repeat');
-r.on('click', function() {
-    if(toggleRepeat) {
+r.on('click', function () {
+    if (toggleRepeat) {
         toggleRepeat = false;
         re = false;
         r.removeClass('controlActive');
@@ -219,11 +227,9 @@ r.on('click', function() {
 function getPos() {
     var width = window.innerWidth;
     var x;
-    
+
     console.log(width);
-    x = (-width + 764.45)/2.101;
-    
+    x = (-width + 764.45) / 2.101;
+
     return x;
 }
-
-
