@@ -390,6 +390,9 @@ function getInfo(index) {
 // When the page loads initiate the program
 $(document).ready(function () {
     init();
+    
+    console.log("Height is: " + window.innerHeight);
+    console.log("Width is: " + window.innerWidth);
 });
 
 
