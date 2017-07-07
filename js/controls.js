@@ -111,8 +111,8 @@ degSlider.on("change", function () {
 });
 
 // Volume Slider
-var volSlider = $('#volume');
 var volumeSlider = $('.vol');
+
 // Create the slider 
 volumeSlider.slider({
     range: "min",
@@ -124,23 +124,40 @@ volumeSlider.slider({
 });
 
 // When ever the silder is used change value in the input and run function to reload
-volumeSlider.on('slide', function (event, ui) {
+volumeSlider.on('slide', function(event, ui) {
     var val = ui.value / 100;
     aud.volume = val;
 });
 
+// Sets cookies when the users drops the volume handle
+volumeSlider.on('slidestop', function(event, ui) {
+    var val = ui.value / 100;
+    
+    // Set Volume Cookie
+    Cookies.set('vol', val);
+    console.log(Cookies.get('vol'));
+})
+
 // Mute click listener
 var mute = $('.lowvol');
-mute.on('click', function () {
+mute.on('click', function() {
     aud.volume = 0;
     volumeSlider.slider("option", "value", 0);
+    
+    // Set Volume Cookie
+    Cookies.set('vol', 0);
+    console.log(Cookies.get('vol'));
 });
 
 // Full volume click listener
 var full = $('.highvol');
-full.on('click', function () {
+full.on('click', function() {
     aud.volume = 1;
     volumeSlider.slider("option", "value", 100);
+    
+    // Set Volume Cookie
+    Cookies.set('vol', 1);
+    console.log(Cookies.get('vol'));
 });
 
 
@@ -222,5 +239,14 @@ r.on('click', function () {
     }
 });
 
+
+// Background Color
+
+$('#bkgColor').on("change", function () {
+    var color = $('#bkgColor').val();
+    Cookies.set('bkgColor', ''+ color +'');
+    
+    $('body').css("background-color", color);
+});
 
 

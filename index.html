@@ -3,18 +3,28 @@
 
 <head>
     <meta charset=utf-8>
-    <title>Audio Vis Experiment</title>
+    <title>Manseth Visualizer</title>
+
+    <!--    Meta Information-->
+    <meta name="description" content="Manseth music visualizer. Upload your own music or listen to our No Copyright songs on our visualizer. Feel free to play around and enjoy the website.">
+    <meta name="keywords" content="Manseth, Music, Visualizer, Visualiser">
+    <meta name="author" content="Chase Manseth">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--    Bootstrap-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+    <!--    Dropzone -->
     <link rel="stylesheet" href="css/dropzone.css">
     <script src="js/dropzone.js"></script>
-    
+
+    <!--    Jquery and my styles-->
     <link rel='stylesheet' href='css/jquery-ui.css'>
     <link rel="stylesheet" href="css/style.css">
-    
+
     <script src="js/js.cookie.js"></script>
 
-    <!--        <link rel="stylesheet" href="css/input.css">-->
+    <!--  Google Console -->
     <meta name="google-site-verification" content="e0pr5rbrwdkt0iIZu92S2DPb3lCVXY01wFjypyhb-yo" />
 
     <!-- Google Analytics -->
@@ -33,6 +43,7 @@
 
         ga('create', 'UA-98201458-1', 'auto');
         ga('send', 'pageview');
+
     </script>
 
 
@@ -104,22 +115,22 @@
                 <!-- Volume Slider -->
                 <div class="row volume">
                     <div class="col-md-1 col-md-offset-3">
-<!--                        Default Songs -->
+                        <!--                        Default Songs -->
                         <div class="def" id="defaultSongs">
-                            <i class="fa fa-bars defaultSongs" aria-hidden="true"></i>
+                            <i class="fa fa-bars defaultSongs volButt" aria-hidden="true"></i>
                         </div>
                     </div>
                     <div class="col-md-1 volbutton">
                         <div class="lowvol">
-                            <i class="fa fa-volume-down" aria-hidden="true"></i>
+                            <i class="fa fa-volume-down volButt" aria-hidden="true"></i>
                         </div>
                     </div>
-                    <div class="col-md-4 volbutton">
+                    <div class="col-md-4 volbutton volBar">
                         <div class="vol"></div>
                     </div>
                     <div class="col-md-1 volbutton">
                         <div class="highvol">
-                            <i class="fa fa-volume-up" aria-hidden="true"></i>
+                            <i class="fa fa-volume-up volButt" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
@@ -152,21 +163,20 @@
     </div>
 
 
-
-
-
-
     <!-- Settings Modal -->
     <div id="set" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+
                     <h4 class="modal-title text-center">Settings</h4>
+                    <hr>
                 </div>
                 <div class="modal-body">
                     <!-- Content of the settings-->
                     <div class="container-fluid">
+                        <!--                        First Row -->
                         <div class="row">
                             <div class="col-md-3">
                                 <!--  Degree Slider -->
@@ -178,6 +188,7 @@
                                     <input id="degree" type="range" max="10" min="1" value="3">
                                     <p class="degval">Current Value: 3</p>
                                 </div>
+                                <hr>
                                 <!-- End Degree Slider -->
                             </div>
                             <div class="col-md-6">
@@ -207,6 +218,32 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
+                                <!-- End Change Gradient -->
+                            </div>
+                        </div>
+
+                        <!-- Second Row -->
+                        <div class="row">
+                            <div class="col-md-3">
+
+                            </div>
+                            <div class="col-md-6">
+
+                            </div>
+                            <div class="col-md-3">
+                                <!--  Change Background Color -->
+                                <div class="degreeSlider">
+                                    <label for="bkgColor">
+                                    Change Background Color: 
+                                    </label>
+                                    <div class="background">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="bkgColor">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
                                 <!-- End Change Gradient -->
                             </div>
                         </div>
@@ -260,7 +297,7 @@
             </div>
         </div>
     </div>
-    
+
     <!--    Uploaded Songs Modal -->
     <div id="uploadedSong" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
@@ -286,24 +323,24 @@
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    
-    
-    
+
+
+
     <script type="text/javascript" src="js/songs.js"></script>
     <script type="text/javascript" src="js/audio.js"></script>
     <script type="text/javascript" src="js/controls.js"></script>
     <script type="text/javascript" src="js/general.js"></script>
     <script type="text/javascript" src="https://use.fontawesome.com/16c0e3de83.js"></script>
     <script type="text/javascript" src="js/sitecookies.js"></script>
-    
+
     <script type="text/javascript">
         // Try to run it only once
         $(document).ready(function() {
             checkCookies();
         });
-        
+
     </script>
-    
+
 </body>
 
 </html>

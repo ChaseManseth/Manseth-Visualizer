@@ -1,5 +1,5 @@
 function checkCookies() {
-    // Check cookies on the two colors of the bars / visualizer
+    // Visualizer bar color cookies
     var fc = Cookies.get('fc');
     var sc = Cookies.get('sc');
     
@@ -23,17 +23,37 @@ function checkCookies() {
     
     // Finally add the gradient
     grade('' + fc + '', '' + sc + '');
-}
-
-// Getters and Setters for onload
-$(document).ready(function() {
-    // Get First Color
-    function getFC() {
-        return Cookies.get('fc');
+    
+    
+    // Volume cookies
+    var volCook = Cookies.get('vol');
+    
+    // Check if the value is undefined
+    if(volCook === undefined) {
+        // If so set volume to 100
+        Cookies.set('vol', '1');
+        volCook = 1;
     }
     
-    // Get Second Color
-    function getSC() {
-        return Cookies.get('sc');
+    // On load it sets the volume and changes the silder
+    $(".vol").slider("option", "value", volCook * 100);
+    aud.volume = volCook;
+    
+    
+    // Background color cookies
+    var bkgColor = Cookies.get('bkgColor');
+    
+    // Check if background color is undefined
+    if(bkgColor === undefined) {
+        // If so set the background color to black
+        Cookies.set('bkgColor', 'black');
+        bkgColor = "black";
     }
-});
+    
+    // Set Background Color
+    $('body').css("background-color", bkgColor);
+    // Set color value in the input 
+    $('#bkgColor').val(bkgColor);
+    
+}
+

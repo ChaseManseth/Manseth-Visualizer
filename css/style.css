@@ -31,7 +31,7 @@ body {
     bottom: 0;
     height: 100px;
     width: 100%;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.25);
     z-index: 9999;
 }
 
@@ -90,12 +90,17 @@ body {
 
 .lowvol {
     font-size: 1.3em;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .highvol {
     font-size: 1.3em;
-    margin-left: -20px;
+    margin-left: -18px;
+}
+
+.volButt {
+    margin-top: -3px;
+    padding: 5px;
 }
 
 .def, .defUp {

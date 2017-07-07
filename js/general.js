@@ -33,7 +33,6 @@ Dropzone.options.ups = {
 
         $('#uploadSong').modal('hide');
 
-        updateUploadedList();
     }
 };
 
