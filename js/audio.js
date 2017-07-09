@@ -95,17 +95,26 @@ function degreeSet(x) {
 function update() {
     analyser.getByteFrequencyData(dataArray);
 
+    // Power funciton
+        
+
     // Copy the dataArray without high frequencies
     var low = [];
     var len = (bufferLength - snip);
-
+    var power = 3;
     for (var i = 0; i <= len; i++) {
         low.push(dataArray[i]);
     }
-    
+
     // Power
-    for(var i = 0; i < low.length; i++) {
-        low[i] = Math.pow(low[i], 2);
+    var max = 0;
+    for(var i = 0; i < low.length; i++){
+        if(low[i] > max){
+            max = low[i];
+        }
+    }
+    for (var i = 0; i < low.length; i++) {
+        low[i] = Math.pow(low[i], power)/(Math.pow(max, power)/250);
     }
 
     // Use Scott's parabolic approximation function
@@ -139,7 +148,7 @@ function update() {
     // First half going clockwise
     for (var i = 0; i < smooth.length; i++) {
         var width = smooth[i];
-                width = width / 225;
+//        width = width / 225;
         $bars[a].css('height', width);
         a++;
     }
@@ -147,11 +156,13 @@ function update() {
     // Second half going counter-clockwise
     for (var i = smooth.length - 1; i > 0; i--) {
         var width = smooth[i];
-                width = width / 225;
+//        width = width / 225;
         $bars[a].css('height', width);
         a++;
     }
 }
+
+
 
 
 // Initiate function
@@ -243,16 +254,17 @@ function toggleState() {
 }
 
 // Update the seekBar information such as time and position of the slider
-var seekTrue = true; 
+var seekTrue = true;
+
 function seekBar() {
-    if(seekTrue) {
+    if (seekTrue) {
         var bef = $('#bef');
         var aft = $('#aft');
 
         var beforeSec = Math.floor(aud.currentTime);
         var afterSec = Math.floor(aud.duration) - beforeSec;
 
-        seekbar.slider( "option", "value",  beforeSec);
+        seekbar.slider("option", "value", beforeSec);
         bef.html(formatTime(beforeSec));
         aft.html("-" + formatTime(afterSec));
     }
@@ -273,13 +285,13 @@ var re = false;
 function ended() {
     if (aud.ended) {
         // Shuffle and repeat items if a song has ended
-        if(re && shuffle) {
+        if (re && shuffle) {
             repeat();
             start(true);
-        } else if(shuffle) {
+        } else if (shuffle) {
             pickSong();
             start(true);
-        } else if(re) {
+        } else if (re) {
             repeat();
             start(true);
         } else {
@@ -312,14 +324,14 @@ function nextSong() {
     } else {
         ++curIndex;
     }
-    
+
     // If shuffle is on
-    if(shuffle) {
+    if (shuffle) {
         pickSong();
     } else {
         aud.src = srcList[curIndex];
     }
-    
+
     getInfo();
     newSong();
 }
@@ -334,9 +346,9 @@ function prevSong() {
         } else {
             --curIndex;
         }
-        
+
         // If shuffle is on
-        if(shuffle) {
+        if (shuffle) {
             pickSong();
         } else {
             aud.src = srcList[curIndex];
@@ -388,10 +400,7 @@ function getInfo(index) {
 
 
 // When the page loads initiate the program
-$(document).ready(function() {
+$(document).ready(function () {
     init();
-    
+
 });
-
-
-
