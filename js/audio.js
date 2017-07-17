@@ -37,7 +37,7 @@ var $bars = 0;
 // snip is trimming the last blank buffer length
 var snip = 99;
 // n is the degree of the smoothing algorithm
-var n = 3;
+var n = Cookies.get('degCookies');
 
 // Verify degree
 // Ask a question once for higher degrees
@@ -77,6 +77,9 @@ function degreeSet(x) {
             // Restyle it because we have more or less segs now and must adjust
             style();
             n = x;
+            
+            // Set the Cookie
+            Cookies.set('degCookies', x);
         }
     } else {
         // Removes all elements
@@ -87,32 +90,33 @@ function degreeSet(x) {
         // Restyle it because we have more or less segs now and must adjust
         style();
         n = x;
+        
+        // Set the Cookie
+        Cookies.set('degCookies', x);
     }
 }
 
 
 // Main render and update method
 function update() {
-    analyser.getByteFrequencyData(dataArray);
-
-    // Power funciton
-        
+    analyser.getByteFrequencyData(dataArray);   
 
     // Copy the dataArray without high frequencies
     var low = [];
     var len = (bufferLength - snip);
-    var power = 3;
+    var power = Cookies.get('variability'); // Default value is 3
     for (var i = 0; i <= len; i++) {
         low.push(dataArray[i]);
     }
 
-    // Power
+    // Find the max value frequency per run
     var max = 0;
     for(var i = 0; i < low.length; i++){
         if(low[i] > max){
             max = low[i];
         }
     }
+    // Add the power to increase or decrease variability
     for (var i = 0; i < low.length; i++) {
         low[i] = Math.pow(low[i], power)/(Math.pow(max, power)/250);
     }
@@ -140,15 +144,11 @@ function update() {
     }
 
 
-
-    //  Power 2 use 225
-    // Translate modified array
     var a = 0;
 
     // First half going clockwise
     for (var i = 0; i < smooth.length; i++) {
         var width = smooth[i];
-//        width = width / 225;
         $bars[a].css('height', width);
         a++;
     }
@@ -156,10 +156,11 @@ function update() {
     // Second half going counter-clockwise
     for (var i = smooth.length - 1; i > 0; i--) {
         var width = smooth[i];
-//        width = width / 225;
         $bars[a].css('height', width);
         a++;
     }
+    
+    // TODO: add roatate functions
 }
 
 

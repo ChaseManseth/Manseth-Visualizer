@@ -100,19 +100,32 @@ $(function () {
 
 
 // Degree Slider
-// Get the silder and the input to store values
-var degSlider = $('#degree');
-var degVal = $('.degval');
-degVal.html("Current Value: " + degSlider.val());
-// When ever the silder is used change value in the input and run function to reload
-degSlider.on("change", function () {
-    degVal.html("Current Value: " + degSlider.val());
-    degreeSet(degSlider.val());
+var degreeSlider = $('.degree');
+var degreeValue = $('.degval');
+// Create the slider
+degreeSlider.slider({
+    range: "min",
+    animate: "slow",
+    value: 3,
+    min: 1,
+    max: 10,
+    step: 1
 });
+// Slide event changes value
+degreeSlider.on('slide', function(event, ui) {
+    var value = ui.value;
+    degreeValue.html("Degree Value: " + value);
+});
+// On Slidestop event change the degree
+degreeSlider.on('slidestop', function(event, ui) {
+    var value = ui.value;
+    degreeValue.html("Current Value: " + value);
+    degreeSet(value);
+});
+
 
 // Volume Slider
 var volumeSlider = $('.vol');
-
 // Create the slider 
 volumeSlider.slider({
     range: "min",
@@ -122,21 +135,19 @@ volumeSlider.slider({
     max: 100,
     step: 1
 });
-
 // When ever the silder is used change value in the input and run function to reload
 volumeSlider.on('slide', function(event, ui) {
     var val = ui.value / 100;
     aud.volume = val;
 });
-
 // Sets cookies when the users drops the volume handle
 volumeSlider.on('slidestop', function(event, ui) {
     var val = ui.value / 100;
     
     // Set Volume Cookie
     Cookies.set('vol', val);
-    console.log(Cookies.get('vol'));
 })
+
 
 // Mute click listener
 var mute = $('.lowvol');
@@ -146,7 +157,6 @@ mute.on('click', function() {
     
     // Set Volume Cookie
     Cookies.set('vol', 0);
-    console.log(Cookies.get('vol'));
 });
 
 // Full volume click listener
@@ -224,6 +234,7 @@ s.on('click', function () {
     }
 });
 
+
 // Repeat function
 var toggleRepeat = false;
 var r = $('.repeat');
@@ -241,7 +252,6 @@ r.on('click', function () {
 
 
 // Background Color
-
 $('#bkgColor').on("change", function () {
     var color = $('#bkgColor').val();
     Cookies.set('bkgColor', ''+ color +'');
@@ -250,3 +260,28 @@ $('#bkgColor').on("change", function () {
 });
 
 
+// Variability Slider
+var variabilitySlider = $('.variability');
+var variabilityval = $('.variabilityval');
+// Create the slider 
+variabilitySlider.slider({
+    range: "min",
+    animate: "slow",
+    value: 3,
+    min: 1,
+    max: 10,
+    step: 1
+});
+// Slide event changes value
+variabilitySlider.on('slide', function(event, ui) {
+    var value = ui.value;
+    variabilityval.html("Variability Value: " + value);
+});
+// On Slidestop event change the variability
+variabilitySlider.on('slidestop', function(event, ui) {
+    var value = ui.value;
+    variabilityval.html("Current Value: " + value);
+    
+    // Set the Cookie
+    Cookies.set('variability', value);
+});

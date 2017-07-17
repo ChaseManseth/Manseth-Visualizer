@@ -9,13 +9,13 @@ body {
     position: fixed;
     height: 1px;
     width: 3px;
-/*
+    /*
     background: -webkit-linear-gradient(red, black);
     background: -moz-linear-gradient(red, black);
 */
-    transform: rotate(90deg);
     transform-origin: center top;
 }
+
 
 #viz {
     position: relative;
@@ -103,17 +103,16 @@ body {
     padding: 5px;
 }
 
-.def, .defUp {
+.def,
+.defUp {
     font-size: 1.3em;
 }
-
-
 
 
 /* Seekbar Styles */
 
 .seekbar {
-/*    margin-top: 10px;*/
+    /*    margin-top: 10px;*/
     padding-top: 15px;
 }
 
@@ -190,7 +189,6 @@ body {
 .tooltip-arrow {
     border-right-color: none;
 }
-
 
 .info {
     color: white !important;
@@ -284,10 +282,19 @@ body {
     margin-left: -0.5em;
 }
 
+/* Active button styles */
 .controlActive {
-    color: rgba(255,255,255,1);
+    color: rgba(255, 255, 255, 1);
 }
 
 .controlActive:hover {
-    color: rgba(255,255,255,1) !important;
+    color: rgba(255, 255, 255, 1) !important;
 }
+
+/* Degree Slider Styles */
+.degree:hover .ui-slider-range { background: red; }
+.degree:hover .ui-slider-handle { visibility: visible; }
+
+/* Variability Slider Styles */
+.variability:hover .ui-slider-range { background: red; }
+.variability:hover .ui-slider-handle { visibility: visible; }

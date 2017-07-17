@@ -43,7 +43,6 @@
 
         ga('create', 'UA-98201458-1', 'auto');
         ga('send', 'pageview');
-
     </script>
 
 
@@ -159,7 +158,6 @@
 
     <!-- Where the magic happens -->
     <div id="viz">
-
     </div>
 
 
@@ -176,21 +174,38 @@
                 <div class="modal-body">
                     <!-- Content of the settings-->
                     <div class="container-fluid">
-                        <!--                        First Row -->
+                        <!-- First Row -->
                         <div class="row">
                             <div class="col-md-3">
-                                <!--  Degree Slider -->
-                                <div class="degreeSlider">
-                                    <label for="degree">
-                                    Change Degree: 
-                                    <a href="#" data-toggle="tooltip" data-placement="right" title="Changes the amount of bars in the visualiser."><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                </label>
-                                    <input id="degree" type="range" max="10" min="1" value="3">
-                                    <p class="degval">Current Value: 3</p>
+                               <div class="row">
+                                    <!--  Degree Slider -->
+                                    <div class="degreeSlider">
+                                        <label for="degree">
+                                        Change Degree: 
+                                        <a href="#" data-toggle="tooltip" data-placement="right" title="Changes the degree of the visualizer smoothness."><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    </label>
+                                        <div class="degree" id="degree"></div>
+                                        <p class="degval">Current Value: 3</p>
+                                    </div>
+                                    <hr>
+                                    <!-- End Degree Slider -->
                                 </div>
-                                <hr>
-                                <!-- End Degree Slider -->
+                                <div class="row"> <!-- Next Row -->
+                                    <!--  Variability Slider -->
+                                    <div class="variabilitySlider">
+                                        <label for="variability">
+                                        Change Variability: 
+                                        <a href="#" data-toggle="tooltip" data-placement="right" title="Changes the variability of the visualizer."><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    </label>
+                                        <div class="variability" id="variability"></div>
+                                        <p class="variabilityval">Current Value: 3</p>
+                                    </div>
+                                    <hr>
+                                    <!-- End Degree Slider -->
+                                </div>
+                                
                             </div>
+                            
                             <div class="col-md-6">
                                 <!-- Degree Warning -->
                                 <div id="degreeWarning" class="alert alert-danger" role="alert">
@@ -200,51 +215,46 @@
                                 </div>
                                 <!-- End Degree Warning -->
                             </div>
+                            
                             <div class="col-md-3">
-                                <!--  Change Gradient -->
-                                <div class="degreeSlider">
-                                    <label for="gradient">
-                                    Change Gradient Colors: 
-                                    <a href="#" data-toggle="tooltip" data-placement="right" title="First color is the one closest to the circle."><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                </label>
-                                    <div class="gradient">
-                                        <div class="form-group">
-                                            <label for="firstColor">First Color</label>
-                                            <input type="text" class="form-control" id="firstColor">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="secondColor">Second Color</label>
-                                            <input type="text" class="form-control" id="secondColor">
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <!-- End Change Gradient -->
-                            </div>
-                        </div>
-
-                        <!-- Second Row -->
-                        <div class="row">
-                            <div class="col-md-3">
-
-                            </div>
-                            <div class="col-md-6">
-
-                            </div>
-                            <div class="col-md-3">
-                                <!--  Change Background Color -->
-                                <div class="degreeSlider">
-                                    <label for="bkgColor">
-                                    Change Background Color: 
+                               <div class="row">
+                                    <!--  Change Gradient -->
+                                    <div class="degreeSlider">
+                                        <label for="gradient">
+                                        Change Gradient Colors: 
+                                        <a href="#" data-toggle="tooltip" data-placement="right" title="First color is the one closest to the circle."><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                     </label>
-                                    <div class="background">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="bkgColor">
+                                        <div class="gradient">
+                                            <div class="form-group">
+                                                <label for="firstColor">First Color</label>
+                                                <input type="text" class="form-control" id="firstColor">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="secondColor">Second Color</label>
+                                                <input type="text" class="form-control" id="secondColor">
+                                            </div>
                                         </div>
                                     </div>
+                                    <hr>
+                                    <!-- End Change Gradient -->
                                 </div>
-                                <hr>
-                                <!-- End Change Gradient -->
+                                
+                                <div class="row"> <!-- Next Row -->
+                                    <!--  Change Background Color -->
+                                    <div class="degreeSlider">
+                                        <label for="bkgColor">
+                                        Change Background Color: 
+                                        </label>
+                                        <div class="background">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="bkgColor">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <!-- End Change Gradient -->
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -338,7 +348,6 @@
         $(document).ready(function() {
             checkCookies();
         });
-
     </script>
 
 </body>
