@@ -174,7 +174,8 @@ function init() {
     var source = AUDIO.createMediaElementSource(aud);
     source.connect(analyser);
     analyser.connect(AUDIO.destination);
-
+    
+    n = Cookies.get('degCookies');
     $bars = createBars((((bufferLength - snip) - 1) * 2) * n);
     style();
     start(true);
@@ -401,7 +402,7 @@ function getInfo(index) {
 
 
 // When the page loads initiate the program
-$(document).ready(function () {
-    init();
-
-});
+//$(document).ready(function () {
+//    init();
+//
+//});

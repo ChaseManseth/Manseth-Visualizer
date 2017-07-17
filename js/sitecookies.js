@@ -1,4 +1,14 @@
 function checkCookies() {
+    // Check if is a users first time on the site
+    var firstTime = Cookies.get('firstTime');
+    
+    // Check if the cookie is undefined
+    if(firstTime === undefined) {
+        // Set it to false if it doesn't exist
+        Cookies.set('firstTime', 'false');
+    }
+    
+    
     // Visualizer bar color cookies
     var fc = Cookies.get('fc');
     var sc = Cookies.get('sc');
@@ -61,19 +71,22 @@ function checkCookies() {
     // Check if the cookie  doesn't have value
     if(degCookie === undefined) {
         // Check if a mobile device is not being used
-        if(!detectmob) {
+        if(detectmob) {
             // Check is the browser is chrome
             var isChrome = !!window.chrome && !!window.chrome.webstore;
             if(isChrome) {
                 // If true set to 3
                 Cookies.set('degCookies', '3');
+                degCookie = 3;
             } else {
                 // If false set to 2
                 Cookies.set('degCookies', '2');
+                degCookie = 2;
             }
         } else {
             // If mobile device set to 1
             Cookies.set('degCookies', '1');
+            degCookie = 1;
         }
     }
     
@@ -106,6 +119,6 @@ function checkCookies() {
     var minSnip = Cookies.get('minSnip'); // Default 0
     var maxSnip = Cookies.get('maxSnip'); // Default 256 - 99
     
-    
+    console.log("Cookies Checked");
 }
 
