@@ -71,7 +71,7 @@ function checkCookies() {
     // Check if the cookie  doesn't have value
     if(degCookie === undefined) {
         // Check if a mobile device is not being used
-        if(detectmob) {
+        if(!detectmob()) {
             // Check is the browser is chrome
             var isChrome = !!window.chrome && !!window.chrome.webstore;
             if(isChrome) {
@@ -90,7 +90,7 @@ function checkCookies() {
         }
     }
     
-    // Set cookie value
+    // Set value
     $(".degree").slider("value", degCookie);
     $(".degval").html("Current Value: " + degCookie);
 
@@ -104,17 +104,30 @@ function checkCookies() {
         variability = 3;
     }
     
-    // Set cookie value
+    // Set value
     $(".variability").slider("value", variability);
     $(".variabilityval").html("Current Value: " + variability);
     
+    // Radius value cookie
+    var radius = Cookies.get('radius');
+    //Check if the cookie doesn't exist
+    if(radius === undefined) {
+        // Check if a mobile device is being used
+        if(!detectmob()) {
+            Cookies.set('radius', '160');
+            radius = 160;
+        } else {
+            // If a mobile device is being used
+            Cookies.set('radius', '50');
+            radius = 50;
+        }
+    }
     
     // Setting variables for future updates
     var rotate = Cookies.get('rotate'); // Default 0
     var numBars = Cookies.get('numBars'); // Base Number of bars before degree || Maybe remove it
     var reflect = Cookies.get('reflect'); // T/F
-    var radius = Cookies.get('radius'); // Browser def = 160px but add functions to adjust based on mobile and browser size
-    
+     // Browser def = 160px but add functions to adjust based on mobile and browser size
     var radiusChangeBass = Cookies.get('rBass'); // Default true
     var minSnip = Cookies.get('minSnip'); // Default 0
     var maxSnip = Cookies.get('maxSnip'); // Default 256 - 99

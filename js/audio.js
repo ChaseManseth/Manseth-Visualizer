@@ -96,6 +96,7 @@ function degreeSet(x) {
     }
 }
 
+var totMax = 0;
 
 // Main render and update method
 function update() {
@@ -108,14 +109,10 @@ function update() {
     for (var i = 0; i <= len; i++) {
         low.push(dataArray[i]);
     }
-
+    
     // Find the max value frequency per run
-    var max = 0;
-    for(var i = 0; i < low.length; i++){
-        if(low[i] > max){
-            max = low[i];
-        }
-    }
+    var max = 255;
+    
     // Add the power to increase or decrease variability
     for (var i = 0; i < low.length; i++) {
         low[i] = Math.pow(low[i], power)/(Math.pow(max, power)/250);
@@ -237,7 +234,6 @@ function style() {
         var rot = -90 + ((360 / $bars.length) * i);
         $elem.css('transform', 'rotate(' + rot + 'deg)');
         angle += step;
-
     }
 }
 
@@ -256,20 +252,18 @@ function toggleState() {
 }
 
 // Update the seekBar information such as time and position of the slider
-var seekTrue = true;
 
 function seekBar() {
-    if (seekTrue) {
-        var bef = $('#bef');
-        var aft = $('#aft');
+    var bef = $('#bef');
+    var aft = $('#aft');
 
-        var beforeSec = Math.floor(aud.currentTime);
-        var afterSec = Math.floor(aud.duration) - beforeSec;
+    var beforeSec = Math.floor(aud.currentTime);
+    var afterSec = Math.floor(aud.duration) - beforeSec;
 
-        seekbar.slider("option", "value", beforeSec);
-        bef.html(formatTime(beforeSec));
-        aft.html("-" + formatTime(afterSec));
-    }
+    seekbar.slider("option", "value", beforeSec);
+    bef.html(formatTime(beforeSec));
+    aft.html("-" + formatTime(afterSec));
+
 }
 
 // Formats time
@@ -397,12 +391,3 @@ function getInfo(index) {
 
 
 
-
-
-
-
-// When the page loads initiate the program
-//$(document).ready(function () {
-//    init();
-//
-//});
