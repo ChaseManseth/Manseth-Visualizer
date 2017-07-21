@@ -109,9 +109,9 @@ function checkCookies() {
     $(".variabilityval").html("Current Value: " + variability);
     
     // Radius value cookie
-    var radius = Cookies.get('radius');
+    var rad = Cookies.get('radius');
     //Check if the cookie doesn't exist
-    if(radius === undefined) {
+    if(rad === undefined) {
         // Check if a mobile device is being used
         if(!detectmob()) {
             Cookies.set('radius', '160');

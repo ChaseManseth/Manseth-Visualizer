@@ -285,3 +285,33 @@ variabilitySlider.on('slidestop', function(event, ui) {
     // Set the Cookie
     Cookies.set('variability', value);
 });
+
+
+// Radius Slider
+var radiusSlider = $('.radius');
+var radiusval = $('.radiusval');
+// Create the slider 
+radiusSlider.slider({
+    range: "min",
+    animate: "slow",
+    value: 160,
+    min: 0,
+    max: 800,
+    step: 32
+});
+// Slide event changes value
+radiusSlider.on('slide', function(event, ui) {
+    var value = ui.value;
+    value = Math.floor((value / 160) * 100);
+    
+    radiusval.html(value + "%");
+    style(ui.value);
+});
+// On Slidestop event change the variability
+radiusSlider.on('slidestop', function(event, ui) {
+    var value = ui.value;
+    value = Math.floor((value / 160) * 100);
+    
+    radiusval.html(value + "%");
+    
+});

@@ -218,10 +218,14 @@ function start(x) {
     }
 }
 
+var radius = Cookies.get('radius');
 // Rotate and properly position the bars into a circle with a set radius
-function style() {
+function style(x) {
+    if(x != null || x != undefined) {
+        radius = x;
+    }
+    
     var step = Math.PI * 2 / $bars.length;
-    var radius = 160;
     var angle = 0;
 
     for (var i = 0; i < $bars.length; i++) {

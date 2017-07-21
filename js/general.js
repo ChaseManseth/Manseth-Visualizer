@@ -88,3 +88,19 @@ function detectmob() {
     return false;
   }
 }
+
+
+
+
+function invert(rgb) {
+  rgb = Array.prototype.join.call(arguments).match(/(-?[0-9\.]+)/g);
+  for (var i = 0; i < rgb.length; i++) {
+    rgb[i] = (i === 3 ? 1 : 255) - rgb[i];
+  }
+  return rgb;
+}
+
+
+console.log(
+  invert(127, 127, 127)
+);
