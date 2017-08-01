@@ -1,3 +1,7 @@
+// Cookie variables
+var radius, n;
+//var n = Cookies.get('degCookies'); line 44
+
 // Create audio context
 var AUDIO = new AudioContext();
 if (!AUDIO) {
@@ -35,9 +39,8 @@ function createBars(numBars) {
 // $bars is an array of all the bars creates
 var $bars = 0;
 // snip is trimming the last blank buffer length
-var snip = 99;
+var snip = 99; // Normal is 99
 // n is the degree of the smoothing algorithm
-var n = Cookies.get('degCookies');
 
 // Verify degree
 // Ask a question once for higher degrees
@@ -75,9 +78,9 @@ function degreeSet(x) {
             $bars = 0;
             $bars = createBars((((bufferLength - snip) - 1) * 2) * x);
             // Restyle it because we have more or less segs now and must adjust
-            style();
+            circle();
             n = x;
-            
+
             // Set the Cookie
             Cookies.set('degCookies', x);
         }
@@ -88,19 +91,18 @@ function degreeSet(x) {
         $bars = 0;
         $bars = createBars((((bufferLength - snip) - 1) * 2) * x);
         // Restyle it because we have more or less segs now and must adjust
-        style();
+        circle();
         n = x;
-        
+
         // Set the Cookie
         Cookies.set('degCookies', x);
     }
 }
 
-var totMax = 0;
 
 // Main render and update method
 function update() {
-    analyser.getByteFrequencyData(dataArray);   
+    analyser.getByteFrequencyData(dataArray);
 
     // Copy the dataArray without high frequencies
     var low = [];
@@ -109,13 +111,13 @@ function update() {
     for (var i = 0; i <= len; i++) {
         low.push(dataArray[i]);
     }
-    
+
     // Find the max value frequency per run
     var max = 255;
-    
+
     // Add the power to increase or decrease variability
     for (var i = 0; i < low.length; i++) {
-        low[i] = Math.pow(low[i], power)/(Math.pow(max, power)/250);
+        low[i] = Math.pow(low[i], power) / (Math.pow(max, power) / 250);
     }
 
     // Use Scott's parabolic approximation function
@@ -156,7 +158,9 @@ function update() {
         $bars[a].css('height', width);
         a++;
     }
-    
+
+
+
     // TODO: add roatate functions
 }
 
@@ -171,11 +175,19 @@ function init() {
     var source = AUDIO.createMediaElementSource(aud);
     source.connect(analyser);
     analyser.connect(AUDIO.destination);
-    
+
+    // Setting cookie values in document ready so no issues arise on first site load
     n = Cookies.get('degCookies');
+    radius = Cookies.get('radius');
+
     $bars = createBars((((bufferLength - snip) - 1) * 2) * n);
-    style();
+    circle();
     start(true);
+
+    // Get rgb color of the first bar and set it
+    var rgb = hexToRgb(colorNameToHex(Cookies.get('fc')));
+    uploadBtnColorChange(rgb);
+
 }
 
 // Start the song is paused and vice versa
@@ -218,13 +230,13 @@ function start(x) {
     }
 }
 
-var radius = Cookies.get('radius');
+
 // Rotate and properly position the bars into a circle with a set radius
-function style(x) {
-    if(x != null || x != undefined) {
+function circle(x) {
+    if (x != null || x != undefined) {
         radius = x;
     }
-    
+
     var step = Math.PI * 2 / $bars.length;
     var angle = 0;
 
@@ -392,6 +404,3 @@ function getInfo(index) {
         $('.artist').html(artist);
     }
 }
-
-
-

@@ -16,7 +16,6 @@ body {
     transform-origin: center top;
 }
 
-
 #viz {
     position: relative;
     transform: rotate(-90deg);
@@ -194,32 +193,6 @@ body {
     color: white !important;
 }
 
-.btn.outline {
-    background: none;
-    padding: 12px 22px;
-}
-
-.btn-danger.outline {
-    border: 2px solid #ff0000;
-    color: #ff0000;
-}
-
-.btn-danger.outline:hover,
-.btn-danger.outline:focus,
-.btn-danger.outline:active,
-.btn-danger.outline.active,
-.open>.dropdown-toggle.btn-danger {
-    color: #ff7a7a;
-    border-color: #ff7a7a;
-}
-
-.btn-danger.outline:active,
-.btn-danger.outline.active {
-    border-color: #932020;
-    color: #000;
-    box-shadow: none;
-}
-
 .dz-message {
     color: black !important;
 }
@@ -282,7 +255,9 @@ body {
     margin-left: -0.5em;
 }
 
+
 /* Active button styles */
+
 .controlActive {
     color: rgba(255, 255, 255, 1);
 }
@@ -291,10 +266,34 @@ body {
     color: rgba(255, 255, 255, 1) !important;
 }
 
+
 /* Degree Slider Styles */
-.degree:hover .ui-slider-range { background: red; }
-.degree:hover .ui-slider-handle { visibility: visible; }
+
+.degree:hover .ui-slider-range {
+    background: red;
+}
+
+.degree:hover .ui-slider-handle {
+    visibility: visible;
+}
+
 
 /* Variability Slider Styles */
-.variability:hover .ui-slider-range { background: red; }
-.variability:hover .ui-slider-handle { visibility: visible; }
+
+.variability:hover .ui-slider-range {
+    background: red;
+}
+
+.variability:hover .ui-slider-handle {
+    visibility: visible;
+}
+
+
+/* Upload button styles */
+
+.uploadbtn {
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 15px 15px 15px 15px;
+    position: absolute;
+}

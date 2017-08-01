@@ -43,6 +43,7 @@
 
         ga('create', 'UA-98201458-1', 'auto');
         ga('send', 'pageview');
+
     </script>
 
 
@@ -53,10 +54,8 @@
 
     <div class="row">
         <div class="col-md-3">
-            <!-- Upload -->
-            <div class="upload">
-                <div id="upload" class="btn btn-danger outline">Upload music</div>
-            </div>
+            <!-- Upload button -->
+            <div id="upload" class="uploadbtn">Upload music</div>
         </div>
         <div class="col-md-offset-8 col-md-1">
             <!-- Settings -->
@@ -72,45 +71,70 @@
     <div class="footer container-fluid">
         <div class="row">
             <div class="col-md-3 info">
+                <!-- Right side -->
                 <h4 class="title"></h4>
                 <h5 class="artist"></h5>
             </div>
+
             <div class="col-md-6">
+                <!-- Middle section -->
                 <!-- Controls -->
-                <div class="text-center">
-                    <!-- Repeat button -->
-                    <div class="box">
-                        <div id="repeat" class="repeat">
-                            <i class="fa fa-repeat" aria-hidden="true"></i>
+                <div class="row">
+                    <div class="text-center">
+                        <!-- Repeat button -->
+                        <div class="box">
+                            <div id="repeat" class="repeat">
+                                <i class="fa fa-repeat" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <!-- Prev button -->
+                        <div class="box">
+                            <div id="prev" class="prev">
+                                <i class="fa fa-step-backward" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <!-- Play Button-->
+                        <div class="box">
+                            <div id="play" class="play">
+                                <i id="stateicon" class="fa fa-pause-circle-o" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <!-- Next button -->
+                        <div class="box">
+                            <div id="next" class="next">
+                                <i class="fa fa-step-forward" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <!-- Shuffle button -->
+                        <div class="box">
+                            <div id="shuffle" class="shuffle">
+                                <i class="fa fa-random" aria-hidden="true"></i>
+                            </div>
                         </div>
                     </div>
-                    <!-- Prev button -->
-                    <div class="box">
-                        <div id="prev" class="prev">
-                            <i class="fa fa-step-backward" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                    <!-- Play Button-->
-                    <div class="box">
-                        <div id="play" class="play">
-                            <i id="stateicon" class="fa fa-pause-circle-o" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                    <!-- Next button -->
-                    <div class="box">
-                        <div id="next" class="next">
-                            <i class="fa fa-step-forward" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                    <!-- Shuffle button -->
-                    <div class="box">
-                        <div id="shuffle" class="shuffle">
-                            <i class="fa fa-random" aria-hidden="true"></i>
+                </div>
+
+                <!-- Seek Bar Slider -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Seek Slider -->
+                        <div class="row seekbar">
+                            <div class="col-md-1">
+                                <p id="bef" class="bef">0:00</p>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="seek"></div>
+                            </div>
+                            <div class="col-md-1">
+                                <p id="aft" class="aft">-0:00</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-3">
+                <!-- Left side -->
                 <!-- Volume Slider -->
                 <div class="row volume">
                     <div class="col-md-1 col-md-offset-3">
@@ -131,24 +155,6 @@
                         <div class="highvol">
                             <i class="fa fa-volume-up volButt" aria-hidden="true"></i>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Seek Bar Slider -->
-        <div class="row">
-            <div class="col-md-offset-3 col-md-6">
-                <!-- Seek Slider -->
-                <div class="row seekbar">
-                    <div class="col-md-1">
-                        <p id="bef" class="bef">0:00</p>
-                    </div>
-                    <div class="col-md-10">
-                        <div class="seek"></div>
-                    </div>
-                    <div class="col-md-1">
-                        <p id="aft" class="aft">-0:00</p>
                     </div>
                 </div>
             </div>
@@ -177,7 +183,7 @@
                         <!-- First Row -->
                         <div class="row">
                             <div class="col-md-3">
-                               <div class="row">
+                                <div class="row">
                                     <!--  Degree Slider -->
                                     <div class="degreeSlider">
                                         <label for="degree">
@@ -190,8 +196,9 @@
                                     <hr>
                                     <!-- End Degree Slider -->
                                 </div>
-                                
-                                <div class="row"> <!-- Next Row -->
+
+                                <div class="row">
+                                    <!-- Next Row -->
                                     <!--  Variability Slider -->
                                     <div class="variabilitySlider">
                                         <label for="variability">
@@ -204,8 +211,9 @@
                                     <hr>
                                     <!-- End Variability Slider -->
                                 </div>
-                                
-                                <div class="row"> <!-- Next Row -->
+
+                                <div class="row">
+                                    <!-- Next Row -->
                                     <!--  Radius Slider -->
                                     <div class="radiusSlider">
                                         <label for="radius">
@@ -218,9 +226,9 @@
                                     <hr>
                                     <!-- End Radius Slider -->
                                 </div>
-                                
+
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <!-- Degree Warning -->
                                 <div id="degreeWarning" class="alert alert-danger" role="alert">
@@ -230,9 +238,9 @@
                                 </div>
                                 <!-- End Degree Warning -->
                             </div>
-                            
+
                             <div class="col-md-3">
-                               <div class="row">
+                                <div class="row">
                                     <!--  Change Gradient -->
                                     <div class="degreeSlider">
                                         <label for="gradient">
@@ -253,8 +261,9 @@
                                     <hr>
                                     <!-- End Change Gradient -->
                                 </div>
-                                
-                                <div class="row"> <!-- Next Row -->
+
+                                <div class="row">
+                                    <!-- Next Row -->
                                     <!--  Change Background Color -->
                                     <div class="degreeSlider">
                                         <label for="bkgColor">
@@ -269,7 +278,7 @@
                                     <hr>
                                     <!-- End Change Gradient -->
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -362,9 +371,10 @@
         // Try to run it only once
         $(document).ready(function() {
             checkCookies();
-            
+
             init();
         });
+
     </script>
 
 </body>

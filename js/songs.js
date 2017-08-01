@@ -22,11 +22,17 @@ var defaultSongs = {
         artist: "Ash O'Connor",
         coverImage: "",
         src: "music/song4.mp3"
+    },
+    five: {
+        title: "On & On (feat. Daniel Levi) [NCS Release]",
+        artist: "Cartoon ",
+        coverImage: "",
+        src: "music/song5.mp3"
     }
 };
 
 // Copy and paste to add more songs
-//  five: {
+//  six: {
 //        title: "",
 //        artist: "",
 //        coverImage: "",

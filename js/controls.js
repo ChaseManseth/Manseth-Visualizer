@@ -3,7 +3,7 @@ $(document).keypress(function (e) {
     if (e.which == 32) {
         toggleState();
     }
-    
+
 });
 
 // Toggle played and paused states
@@ -76,19 +76,23 @@ function grade(first, second) {
 $('#firstColor').on("change", function () {
     var f = $('#firstColor').val();
     var s = $('#secondColor').val();
-    Cookies.set('fc', ''+ f +'');
-    Cookies.set('sc', ''+ s +'');
-    
+    Cookies.set('fc', '' + f + '');
+    Cookies.set('sc', '' + s + '');
+
     console.log(Cookies.get('fc'));
     grade(f, s);
+
+    // Update the first color cookie for the upload btn
+    updateFirstColor();
+
 });
 
 $('#secondColor').on("change", function () {
     var f = $('#firstColor').val();
     var s = $('#secondColor').val();
-    Cookies.set('fc', ''+ f +'');
-    Cookies.set('sc', ''+ s +'');
-    
+    Cookies.set('fc', '' + f + '');
+    Cookies.set('sc', '' + s + '');
+
     console.log(Cookies.get('fc'));
     grade(f, s);
 });
@@ -112,12 +116,12 @@ degreeSlider.slider({
     step: 1
 });
 // Slide event changes value
-degreeSlider.on('slide', function(event, ui) {
+degreeSlider.on('slide', function (event, ui) {
     var value = ui.value;
     degreeValue.html("Degree Value: " + value);
 });
 // On Slidestop event change the degree
-degreeSlider.on('slidestop', function(event, ui) {
+degreeSlider.on('slidestop', function (event, ui) {
     var value = ui.value;
     degreeValue.html("Current Value: " + value);
     degreeSet(value);
@@ -136,14 +140,14 @@ volumeSlider.slider({
     step: 1
 });
 // When ever the silder is used change value in the input and run function to reload
-volumeSlider.on('slide', function(event, ui) {
+volumeSlider.on('slide', function (event, ui) {
     var val = ui.value / 100;
     aud.volume = val;
 });
 // Sets cookies when the users drops the volume handle
-volumeSlider.on('slidestop', function(event, ui) {
+volumeSlider.on('slidestop', function (event, ui) {
     var val = ui.value / 100;
-    
+
     // Set Volume Cookie
     Cookies.set('vol', val);
 })
@@ -151,20 +155,20 @@ volumeSlider.on('slidestop', function(event, ui) {
 
 // Mute click listener
 var mute = $('.lowvol');
-mute.on('click', function() {
+mute.on('click', function () {
     aud.volume = 0;
     volumeSlider.slider("option", "value", 0);
-    
+
     // Set Volume Cookie
     Cookies.set('vol', 0);
 });
 
 // Full volume click listener
 var full = $('.highvol');
-full.on('click', function() {
+full.on('click', function () {
     aud.volume = 1;
     volumeSlider.slider("option", "value", 100);
-    
+
     // Set Volume Cookie
     Cookies.set('vol', 1);
     console.log(Cookies.get('vol'));
@@ -254,8 +258,8 @@ r.on('click', function () {
 // Background Color
 $('#bkgColor').on("change", function () {
     var color = $('#bkgColor').val();
-    Cookies.set('bkgColor', ''+ color +'');
-    
+    Cookies.set('bkgColor', '' + color + '');
+
     $('body').css("background-color", color);
 });
 
@@ -273,15 +277,15 @@ variabilitySlider.slider({
     step: 1
 });
 // Slide event changes value
-variabilitySlider.on('slide', function(event, ui) {
+variabilitySlider.on('slide', function (event, ui) {
     var value = ui.value;
     variabilityval.html("Variability Value: " + value);
 });
 // On Slidestop event change the variability
-variabilitySlider.on('slidestop', function(event, ui) {
+variabilitySlider.on('slidestop', function (event, ui) {
     var value = ui.value;
     variabilityval.html("Current Value: " + value);
-    
+
     // Set the Cookie
     Cookies.set('variability', value);
 });
@@ -300,18 +304,54 @@ radiusSlider.slider({
     step: 32
 });
 // Slide event changes value
-radiusSlider.on('slide', function(event, ui) {
+radiusSlider.on('slide', function (event, ui) {
     var value = ui.value;
     value = Math.floor((value / 160) * 100);
-    
+
     radiusval.html(value + "%");
-    style(ui.value);
+    circle(ui.value);
 });
 // On Slidestop event change the variability
-radiusSlider.on('slidestop', function(event, ui) {
+radiusSlider.on('slidestop', function (event, ui) {
     var value = ui.value;
     value = Math.floor((value / 160) * 100);
-    
+
     radiusval.html(value + "%");
-    
+
+});
+
+
+
+// Update the first color cookie for the upload button color
+var firstColor;
+
+function updateFirstColor() {
+    firstColor = Cookies.get('fc');
+
+    // Trigger the mouseleave event with the new color
+    uplbtn.trigger("mouseleave");
+}
+
+// Upload button mouse enter event
+var uplbtn = $('.uploadbtn');
+uplbtn.mouseenter(function upBtnClr() {
+    var rgb = hexToRgb(colorNameToHex(firstColor));
+    var newRGB = tintUploadBtn(rgb);
+
+    // Text Color
+    $(".uploadbtn").css("color", "rgb(" + newRGB.r + "," + newRGB.g + "," + newRGB.b + ")");
+
+    // Border Color
+    $(".uploadbtn").css("border-color", "rgb(" + newRGB.r + "," + newRGB.g + "," + newRGB.b + ")");
+});
+
+// Upload button mouse leave event
+uplbtn.mouseleave(function () {
+    var rgb = hexToRgb(colorNameToHex(firstColor));
+
+    // Text Color
+    $(".uploadbtn").css("color", "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")");
+
+    // Border Color
+    $(".uploadbtn").css("border-color", "rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")");
 });
