@@ -325,6 +325,11 @@ radiusSlider.on('slidestop', function (event, ui) {
 // Update the first color cookie for the upload button color
 var firstColor;
 
+// Get the first color when the page is ready
+$(document).ready(function() {
+   firstColor = Cookies.get('fc'); 
+});
+
 function updateFirstColor() {
     firstColor = Cookies.get('fc');
 
@@ -334,7 +339,7 @@ function updateFirstColor() {
 
 // Upload button mouse enter event
 var uplbtn = $('.uploadbtn');
-uplbtn.mouseenter(function upBtnClr() {
+uplbtn.mouseenter(function () {
     var rgb = hexToRgb(colorNameToHex(firstColor));
     var newRGB = tintUploadBtn(rgb);
 
