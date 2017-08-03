@@ -289,6 +289,28 @@ body {
 }
 
 
+/* Radius Slider Styles */
+
+.radius:hover .ui-slider-range {
+    background: red;
+}
+
+.radius:hover .ui-slider-handle {
+    visibility: visible;
+}
+
+
+/* Rotate Slider Styles */
+
+.rotate:hover .ui-slider-range {
+    background: red;
+}
+
+.rotate:hover .ui-slider-handle {
+    visibility: visible;
+}
+
+
 /* Upload button styles */
 
 .uploadbtn {

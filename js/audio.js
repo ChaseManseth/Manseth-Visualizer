@@ -1,5 +1,5 @@
 // Cookie variables
-var radius, n;
+var radius, n, numberBars, rotAngle;
 //var n = Cookies.get('degCookies'); line 44
 
 // Create audio context
@@ -24,7 +24,7 @@ function createBars(numBars) {
     var barCollection = [];
 
     console.log('numBars', numBars);
-
+    numberBars = numBars;
     for (var i = 0; i <= numBars; i++) {
         var a = document.createElement('div');
         a.classList.add('bar');
@@ -143,27 +143,25 @@ function update() {
     }
 
 
-    var a = 0;
+    var outputArr = [];
 
-    // First half going clockwise
+    // Add it forward
     for (var i = 0; i < smooth.length; i++) {
-        var width = smooth[i];
-        $bars[a].css('height', width);
-        a++;
+        outputArr.push(smooth[i]);
     }
-
-    // Second half going counter-clockwise
+    // Add it backwards
     for (var i = smooth.length - 1; i > 0; i--) {
-        var width = smooth[i];
-        $bars[a].css('height', width);
-        a++;
+        outputArr.push(smooth[i]);
     }
 
+    var rotatedArr = arrayRotate(outputArr, rotAngle);
 
 
-    // TODO: add roatate functions
+    for (var i = 0; i < rotatedArr.length; i++) {
+        var height = rotatedArr[i];
+        $bars[i].css('height', height);
+    }
 }
-
 
 
 
@@ -179,6 +177,7 @@ function init() {
     // Setting cookie values in document ready so no issues arise on first site load
     n = Cookies.get('degCookies');
     radius = Cookies.get('radius');
+    angle = Cookies.get('rotate');
 
     $bars = createBars((((bufferLength - snip) - 1) * 2) * n);
     circle();

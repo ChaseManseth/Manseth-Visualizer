@@ -321,13 +321,42 @@ radiusSlider.on('slidestop', function (event, ui) {
 });
 
 
+// Rotate Slider
+var rotateSlider = $('.rotate');
+var rotateval = $('.rotateval');
+// Create the slider 
+rotateSlider.slider({
+    range: "min",
+    animate: "slow",
+    value: 0,
+    min: 0,
+    max: 360,
+    step: 1
+});
+// Slide event changes value
+rotateSlider.on('slide', function (event, ui) {
+    var value = ui.value;
+
+
+    rotateval.html(value + "deg");
+    rotAngle = Math.ceil(value * (numberBars / 360.0));
+});
+// On Slidestop event change the variability
+rotateSlider.on('slidestop', function (event, ui) {
+    var value = ui.value;
+
+
+    rotateval.html(value + "deg");
+    rotAngle = Math.ceil(value * (numberBars / 360.0));
+});
+
 
 // Update the first color cookie for the upload button color
 var firstColor;
 
 // Get the first color when the page is ready
-$(document).ready(function() {
-   firstColor = Cookies.get('fc'); 
+$(document).ready(function () {
+    firstColor = Cookies.get('fc');
 });
 
 function updateFirstColor() {

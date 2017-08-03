@@ -283,5 +283,11 @@ function tintUploadBtn(rgb) {
     }
 }
 
+// Shift an array a certian amount
+function arrayRotate(arr, count) {
+    count -= arr.length * Math.floor(count / arr.length)
+    arr.push.apply(arr, arr.splice(0, count))
+    return arr
+}
 
 //$(".uploadbtn").css("color", "rgb(" + newR.toString() + "," + newG.toString() + "," + newB.toString() + ")");

@@ -109,6 +109,7 @@ function checkCookies() {
     $(".variability").slider("value", variability);
     $(".variabilityval").html("Current Value: " + variability);
 
+
     // Radius value cookie
     var rad = Cookies.get('radius');
     //Check if the cookie doesn't exist
@@ -124,14 +125,27 @@ function checkCookies() {
         }
     }
 
+
+//    // Set rotation of the visualizer
+//    var rotate = Cookies.get('rotate'); // Default 0
+//    // Chekc if the cookie doesn't exist
+//    if (rotate === undefined) {
+//        Cookies.set('rotate', 0);
+//        rotate = 0;
+//    } else {
+//        Cookies.set('rotate', 0);
+//        rotate = 0;
+//    }
+
+
+
+
     // Setting variables for future updates
-    var rotate = Cookies.get('rotate'); // Default 0
     var numBars = Cookies.get('numBars'); // Base Number of bars before degree || Maybe remove it
     var reflect = Cookies.get('reflect'); // T/F
     // Browser def = 160px but add functions to adjust based on mobile and browser size
     var radiusChangeBass = Cookies.get('rBass'); // Default true
-    var minSnip = Cookies.get('minSnip'); // Default 0
-    var maxSnip = Cookies.get('maxSnip'); // Default 256 - 99
+    var minSnip = Cookies.get('snip'); // Default 99
 
     console.log("Cookies Checked");
 }
